@@ -29,7 +29,7 @@ PROMPT_MD = TOOLS / "prompts" / "master_prompts.md"            # マスター候
 FACES_JSON = TOOLS / "faces.json"                              # 体ごとの顔の位置（雛形）
 FACE_STYLE_JSON = TOOLS / "face_style.json"                    # SVG の顔の部品の形と色（マスター確定後に埋める）
 HINTS_JSON = Path(os.environ.get("CHEESE_HINTS_JSON",
-                                 "D:/claude/チーズ育成/work/zukan_tools/out/hints.json"))
+                                 str(REPO / "zukan_tools" / "out" / "hints.json")))  # 2026-10-19 正本をリポジトリへ移設
 
 DEFAULT_MODEL = "gemini-nano-banana-2.1"     # ウーパーちゃんで実呼び出し確認済み（2026-10-08）。生成前に料金ページを再確認
 MAGENTA = (255, 0, 255)                      # 生成時の背景色（チーズの色に無い）
