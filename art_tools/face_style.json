@@ -1,0 +1,287 @@
+{
+ "schemaVersion": 1,
+ "status": "線の色と太さは組3マスターの主線の実測（2026-10-16）。2026-10-17：性格別の顔の型8つ（types）を追加。目・眉・口・ほっぺの形は face_parts.py が types の数値から作る（旧 eyeGap 等の単独の値は互換のため残すが使わない）",
+ "unit": "長さは顔の幅に対する千分率（整数）。座標は顔の中心から（右・下が正）",
+ "lineColor": "#582819",
+ "lineWidth": 44,
+ "eyeColor": "#3A1A10",
+ "eyeGap": 560,
+ "eyeR": 78,
+ "eyeY": -40,
+ "highlightColor": "#FFFFFF",
+ "highlightR": 26,
+ "mouthY": 120,
+ "mouthW": 190,
+ "cheekColor": "#F2A69B",
+ "cheekAlpha": 120,
+ "cheekX": 420,
+ "cheekY": 80,
+ "cheekRx": 95,
+ "cheekRy": 58,
+ "vintageTone": {
+  "note": "最終段階の体の色の深め方（アプリと同じ値を使う）。仮",
+  "multiplyPermille": 920,
+  "saturationPermille": 1100
+ },
+ "lineWidthImagePermille": 13,
+ "lineWidthNote": "lineWidth は顔の幅に対する千分率（顔の幅 w=300‰ のとき 27px/2048px と同じ太さ）。face_preview.py は lineWidthImagePermille（画像の幅に対する千分率＝体の主線と同じ）から体ごとの顔の幅に合わせて計算し直す。アプリも同じ式（lineWidth = lineWidthImagePermille × 1000 ÷ w）を使う",
+ "mouthColor": "#964646",
+ "tearColor": "#8CC8F0",
+ "cheekHatchColor": "#D9776B",
+ "exprShyNote": "照れ（2026-10-17 作り直し・オーナー指摘「悲しそうに見える」）。困り眉と波線の口をやめる。眉は型の角度を browMinAngle〜browMaxAngle に収めて browRaise だけ上げる（眉のない型は描かない）。目は型のまま eyeScale 倍で eyeLift 上げ、黒目ごと横へ（目の rx の lookPermille‰）ずらして目線をそらす。口は小さな ∪（幅 mouthW・深さ mouthH・mouthShift だけ目線の側へ）。ほっぺは型の大きさの cheekScaleX/Y‰・cheekInset だけ内側・濃さ＋cheekAlphaAdd・斜線4本。ほっぺの色は照れだけ cheekColor（ふだんより濃い）",
+ "exprShy": {
+  "browMinAngle": -40,
+  "browMaxAngle": 0,
+  "browRaise": 25,
+  "browCurve": -10,
+  "eyeScale": 940,
+  "eyeLift": 0,
+  "lookPermille": 800,
+  "mouthW": 110,
+  "mouthH": 30,
+  "mouthShift": 55,
+  "cheekScaleX": 1400,
+  "cheekScaleY": 1350,
+  "cheekInset": 20,
+  "cheekAlphaAdd": 120,
+  "cheekColor": "#EC8478"
+ },
+ "typesNote": "型＝目鼻の基本形（顔の幅＝1000・中心から）。表情は face_parts.shapes() が型の値を受け継いで変形する。brow.angle は＋で内側が上（ハの字）・−で内側が下（つり眉）。eye.lid は半目の切る高さ（ry の千分率）、lidTilt は＋で外側が下がる",
+ "types": {
+  "maru": {
+   "ja": "まんまる目の甘えん坊",
+   "eyeGap": 600,
+   "eyeY": -30,
+   "eye": {
+    "shape": "round",
+    "rx": 100,
+    "ry": 106,
+    "hl": "two"
+   },
+   "brow": null,
+   "mouth": {
+    "shape": "u",
+    "w": 130,
+    "h": 40,
+    "y": 150
+   },
+   "cheek": {
+    "x": 440,
+    "y": 95,
+    "rx": 105,
+    "ry": 64,
+    "alpha": 135
+   }
+  },
+  "nemu": {
+   "ja": "ねむそう目ののんびり屋・内気",
+   "eyeGap": 590,
+   "eyeY": -15,
+   "eye": {
+    "shape": "half",
+    "rx": 95,
+    "ry": 92,
+    "lid": 250,
+    "lidTilt": 14,
+    "hl": "small"
+   },
+   "brow": null,
+   "mouth": {
+    "shape": "u",
+    "w": 120,
+    "h": 28,
+    "y": 150
+   },
+   "cheek": {
+    "x": 440,
+    "y": 95,
+    "rx": 100,
+    "ry": 58,
+    "alpha": 115
+   }
+  },
+  "uru": {
+   "ja": "うるうる目の泣き虫・寂しがり",
+   "eyeGap": 560,
+   "eyeY": -15,
+   "eye": {
+    "shape": "round",
+    "rx": 96,
+    "ry": 110,
+    "hl": "wet"
+   },
+   "brow": {
+    "angle": 60,
+    "w": 120,
+    "gap": 70,
+    "curve": 0,
+    "thick": 900
+   },
+   "mouth": {
+    "shape": "u",
+    "w": 90,
+    "h": 22,
+    "y": 150
+   },
+   "cheek": {
+    "x": 430,
+    "y": 95,
+    "rx": 100,
+    "ry": 60,
+    "alpha": 145
+   }
+  },
+  "tere": {
+   "ja": "点目のはにかみ屋",
+   "eyeGap": 520,
+   "eyeY": -10,
+   "eye": {
+    "shape": "dot",
+    "rx": 54,
+    "ry": 62,
+    "hl": "small"
+   },
+   "brow": {
+    "angle": 36,
+    "w": 90,
+    "gap": 75,
+    "curve": 0,
+    "thick": 800
+   },
+   "mouth": {
+    "shape": "wavy",
+    "w": 130,
+    "h": 18,
+    "y": 140
+   },
+   "cheek": {
+    "x": 410,
+    "y": 85,
+    "rx": 115,
+    "ry": 66,
+    "alpha": 155,
+    "hatch": true
+   }
+  },
+  "tsun": {
+   "ja": "きりっと眉のツンデレ",
+   "eyeGap": 580,
+   "eyeY": -15,
+   "eye": {
+    "shape": "half",
+    "rx": 92,
+    "ry": 96,
+    "lid": 160,
+    "lidTilt": -22,
+    "hl": "one",
+    "lash": false
+   },
+   "brow": {
+    "angle": -80,
+    "w": 135,
+    "gap": 55,
+    "curve": 0,
+    "thick": 1150
+   },
+   "mouth": {
+    "shape": "he",
+    "w": 100,
+    "h": 16,
+    "y": 150
+   },
+   "cheek": {
+    "x": 440,
+    "y": 95,
+    "rx": 95,
+    "ry": 56,
+    "alpha": 120
+   }
+  },
+  "kira": {
+   "ja": "キラキラ目の元気っ子",
+   "eyeGap": 600,
+   "eyeY": -35,
+   "eye": {
+    "shape": "round",
+    "rx": 112,
+    "ry": 124,
+    "hl": "star"
+   },
+   "brow": null,
+   "mouth": {
+    "shape": "open",
+    "w": 190,
+    "h": 72,
+    "y": 175
+   },
+   "cheek": {
+    "x": 450,
+    "y": 95,
+    "rx": 100,
+    "ry": 60,
+    "alpha": 130
+   }
+  },
+  "futo": {
+   "ja": "太眉の気のいいやつ",
+   "eyeGap": 580,
+   "eyeY": -5,
+   "eye": {
+    "shape": "tall",
+    "rx": 62,
+    "ry": 86,
+    "hl": "one"
+   },
+   "brow": {
+    "angle": 0,
+    "w": 160,
+    "gap": 60,
+    "curve": -18,
+    "thick": 1900
+   },
+   "mouth": {
+    "shape": "wide",
+    "w": 260,
+    "h": 42,
+    "y": 150
+   },
+   "cheek": {
+    "x": 450,
+    "y": 100,
+    "rx": 95,
+    "ry": 56,
+    "alpha": 105
+   }
+  },
+  "itome": {
+   "ja": "糸目のすまし屋",
+   "eyeGap": 580,
+   "eyeY": -5,
+   "eye": {
+    "shape": "itome",
+    "rx": 88,
+    "ry": 26
+   },
+   "brow": {
+    "angle": 40,
+    "w": 175,
+    "gap": 60,
+    "curve": -30,
+    "thick": 1300
+   },
+   "mouth": {
+    "shape": "flat",
+    "w": 120,
+    "h": 12,
+    "y": 150
+   },
+   "cheek": {
+    "x": 440,
+    "y": 95,
+    "rx": 95,
+    "ry": 56,
+    "alpha": 95
+   }
+  }
+ }
+}

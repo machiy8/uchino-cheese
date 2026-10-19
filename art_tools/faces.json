@@ -1,0 +1,2672 @@
+{
+ "schemaVersion": 1,
+ "status": "2026-10-17：82種すべてに faceType と位置（cx・cy・w）を記入（第3便37種は一覧の目視で調整）／2026-10-18：bbox・bodyMain（体の太い部分）・neck（首のある体）を追加（body_main.py。neck の手直し：r58・r59・r61・r62・r57=true、f72=false）。neckY は個別値のみ／neckY・neckScale＝くびの品が式（neck_calc.py）で収まらない13種の個別値",
+ "source": {
+  "hints.json": "D:\\claude\\チーズ育成\\work\\zukan_tools\\out\\hints.json",
+  "dataSha256": "56229b9001c39f9478ff72f4e5f74152963256d466efcd585678c25150059034"
+ },
+ "unit": "cx・cy＝顔の中心（画像の幅・高さに対する千分率の整数）／w＝顔の幅（画像の幅に対する千分率）／tilt＝傾き（度・整数）",
+ "fields": {
+  "cx": "顔の中心 x",
+  "cy": "顔の中心 y",
+  "w": "顔の幅",
+  "tilt": "傾き",
+  "sulk": "すね＝体を左右反転して後ろ姿にする（顔なし）",
+  "vintageArt": "最終段階の顔つき特別版があるか（無ければSVGの顔で表示）",
+  "checked": "位置を目で確かめた日",
+  "faceType": "性格別の顔の型（face_style.json の types のキー・work/顔の型_v1.md）"
+ },
+ "faces": {
+  "r01": {
+   "name": "クリームチーズ",
+   "type": "fresh",
+   "cx": 499,
+   "cy": 584,
+   "w": 396,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": true,
+   "checked": "2026-10-17",
+   "note": "最初の相棒（チュートリアルのクリームチーズ）。最終段階の顔つき特別版は初回制作で作る",
+   "faceType": "maru",
+   "bbox": [
+    114,
+    145,
+    886,
+    855
+   ],
+   "bodyMainAuto": [
+    114,
+    247,
+    886,
+    758
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    114,
+    247,
+    886,
+    758
+   ],
+   "neck": false
+  },
+  "r02": {
+   "name": "カッテージチーズ",
+   "type": "fresh",
+   "cx": 499,
+   "cy": 577,
+   "w": 411,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "maru",
+   "bbox": [
+    100,
+    175,
+    899,
+    824
+   ],
+   "bodyMainAuto": [
+    100,
+    392,
+    899,
+    719
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    392,
+    899,
+    719
+   ],
+   "neck": false
+  },
+  "r03": {
+   "name": "マスカルポーネ",
+   "type": "fresh",
+   "cx": 499,
+   "cy": 578,
+   "w": 411,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "nemu",
+   "bbox": [
+    100,
+    169,
+    900,
+    830
+   ],
+   "bodyMainAuto": [
+    100,
+    415,
+    900,
+    741
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    415,
+    900,
+    741
+   ],
+   "neck": false
+  },
+  "r04": {
+   "name": "リコッタ",
+   "type": "fresh",
+   "cx": 499,
+   "cy": 579,
+   "w": 409,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "uru",
+   "bbox": [
+    101,
+    166,
+    898,
+    834
+   ],
+   "bodyMainAuto": [
+    101,
+    308,
+    898,
+    744
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    101,
+    308,
+    898,
+    744
+   ],
+   "neck": false
+  },
+  "r05": {
+   "name": "ブロッチュ",
+   "type": "fresh",
+   "cx": 499,
+   "cy": 578,
+   "w": 411,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tere",
+   "bbox": [
+    100,
+    170,
+    900,
+    830
+   ],
+   "bodyMainAuto": [
+    100,
+    265,
+    900,
+    765
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    265,
+    900,
+    765
+   ],
+   "neck": false
+  },
+  "r06": {
+   "name": "フェタ",
+   "type": "fresh",
+   "cx": 470,
+   "cy": 640,
+   "w": 411,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tere",
+   "bbox": [
+    100,
+    179,
+    900,
+    821
+   ],
+   "bodyMainAuto": [
+    100,
+    276,
+    900,
+    704
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    276,
+    900,
+    704
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r07": {
+   "name": "カマンベール・ド・ノルマンディ",
+   "type": "white_mold",
+   "cx": 499,
+   "cy": 615,
+   "w": 411,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "maru",
+   "bbox": [
+    100,
+    179,
+    900,
+    820
+   ],
+   "bodyMainAuto": [
+    100,
+    281,
+    900,
+    722
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    281,
+    900,
+    722
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r08": {
+   "name": "ブリー・ド・モー",
+   "type": "white_mold",
+   "cx": 499,
+   "cy": 440,
+   "w": 400,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "nemu",
+   "bbox": [
+    100,
+    192,
+    899,
+    808
+   ],
+   "bodyMainAuto": [
+    100,
+    309,
+    899,
+    704
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    309,
+    899,
+    704
+   ],
+   "neck": false
+  },
+  "r09": {
+   "name": "ブリー・ド・ムラン",
+   "type": "white_mold",
+   "cx": 499,
+   "cy": 640,
+   "w": 411,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "maru",
+   "bbox": [
+    100,
+    188,
+    900,
+    812
+   ],
+   "bodyMainAuto": [
+    100,
+    299,
+    900,
+    722
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    299,
+    900,
+    722
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r10": {
+   "name": "シャウルス",
+   "type": "white_mold",
+   "cx": 499,
+   "cy": 580,
+   "w": 380,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "nemu",
+   "bbox": [
+    130,
+    164,
+    870,
+    836
+   ],
+   "bodyMainAuto": [
+    130,
+    220,
+    870,
+    774
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    130,
+    220,
+    870,
+    774
+   ],
+   "neck": false
+  },
+  "r11": {
+   "name": "ヌーシャテル",
+   "type": "white_mold",
+   "cx": 470,
+   "cy": 690,
+   "w": 330,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tere",
+   "bbox": [
+    114,
+    162,
+    886,
+    838
+   ],
+   "bodyMainAuto": [
+    114,
+    250,
+    886,
+    711
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    114,
+    250,
+    886,
+    711
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r12": {
+   "name": "ロックフォール",
+   "type": "blue_mold",
+   "cx": 420,
+   "cy": 675,
+   "w": 412,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tsun",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r13": {
+   "name": "ゴルゴンゾーラ・ドルチェ",
+   "type": "blue_mold",
+   "cx": 420,
+   "cy": 650,
+   "w": 412,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tsun",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r14": {
+   "name": "ゴルゴンゾーラ・ピカンテ",
+   "type": "blue_mold",
+   "cx": 420,
+   "cy": 593,
+   "w": 388,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tsun",
+   "bbox": [
+    111,
+    165,
+    888,
+    835
+   ],
+   "bodyMainAuto": [
+    111,
+    237,
+    888,
+    760
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    111,
+    237,
+    888,
+    760
+   ],
+   "neck": false
+  },
+  "r15": {
+   "name": "スティルトン",
+   "type": "blue_mold",
+   "cx": 410,
+   "cy": 603,
+   "w": 365,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tsun",
+   "bbox": [
+    134,
+    130,
+    866,
+    870
+   ],
+   "bodyMainAuto": [
+    134,
+    184,
+    866,
+    807
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    134,
+    184,
+    866,
+    807
+   ],
+   "neck": false
+  },
+  "r16": {
+   "name": "フルム・ダンベール",
+   "type": "blue_mold",
+   "cx": 499,
+   "cy": 595,
+   "w": 301,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tsun",
+   "bbox": [
+    207,
+    100,
+    793,
+    899
+   ],
+   "bodyMainAuto": [
+    207,
+    153,
+    793,
+    843
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    207,
+    153,
+    793,
+    843
+   ],
+   "neck": false
+  },
+  "r17": {
+   "name": "ブルー・ドーヴェルニュ",
+   "type": "blue_mold",
+   "cx": 420,
+   "cy": 593,
+   "w": 400,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tsun",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    746
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    746
+   ],
+   "neck": false
+  },
+  "r18": {
+   "name": "エポワス",
+   "type": "washed",
+   "cx": 499,
+   "cy": 650,
+   "w": 411,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    179,
+    900,
+    821
+   ],
+   "bodyMainAuto": [
+    100,
+    281,
+    900,
+    722
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    281,
+    900,
+    722
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r19": {
+   "name": "マンステール",
+   "type": "washed",
+   "cx": 499,
+   "cy": 589,
+   "w": 399,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    179,
+    900,
+    820
+   ],
+   "bodyMainAuto": [
+    100,
+    281,
+    900,
+    722
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    281,
+    900,
+    722
+   ],
+   "neck": false
+  },
+  "r20": {
+   "name": "ポン・レヴェック",
+   "type": "washed",
+   "cx": 499,
+   "cy": 585,
+   "w": 399,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    193,
+    900,
+    807
+   ],
+   "bodyMainAuto": [
+    100,
+    318,
+    900,
+    651
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    318,
+    900,
+    651
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r21": {
+   "name": "リヴァロ",
+   "type": "washed",
+   "cx": 499,
+   "cy": 593,
+   "w": 388,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    111,
+    166,
+    888,
+    834
+   ],
+   "bodyMainAuto": [
+    111,
+    231,
+    888,
+    750
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    111,
+    231,
+    888,
+    750
+   ],
+   "neck": false
+  },
+  "r22": {
+   "name": "マロワル",
+   "type": "washed",
+   "cx": 499,
+   "cy": 588,
+   "w": 399,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    180,
+    900,
+    819
+   ],
+   "bodyMainAuto": [
+    100,
+    291,
+    900,
+    698
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    291,
+    900,
+    698
+   ],
+   "neck": false
+  },
+  "r23": {
+   "name": "ラングル",
+   "type": "washed",
+   "cx": 499,
+   "cy": 592,
+   "w": 399,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    167,
+    899,
+    833
+   ],
+   "bodyMainAuto": [
+    100,
+    250,
+    899,
+    749
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    250,
+    899,
+    749
+   ],
+   "neck": false
+  },
+  "r24": {
+   "name": "タレッジョ",
+   "type": "washed",
+   "cx": 450,
+   "cy": 581,
+   "w": 399,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    207,
+    900,
+    793
+   ],
+   "bodyMainAuto": [
+    100,
+    338,
+    900,
+    668
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    338,
+    900,
+    668
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r25": {
+   "name": "ルブロション",
+   "type": "washed",
+   "cx": 499,
+   "cy": 440,
+   "w": 400,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    100,
+    182,
+    899,
+    818
+   ],
+   "bodyMainAuto": [
+    100,
+    284,
+    899,
+    730
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    284,
+    899,
+    730
+   ],
+   "neck": false
+  },
+  "r26": {
+   "name": "シェーブル・フレ",
+   "type": "chevre",
+   "cx": 499,
+   "cy": 579,
+   "w": 396,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    103,
+    166,
+    897,
+    834
+   ],
+   "bodyMainAuto": [
+    103,
+    246,
+    897,
+    750
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    103,
+    246,
+    897,
+    750
+   ],
+   "neck": false
+  },
+  "r27": {
+   "name": "ヴァランセ",
+   "type": "chevre",
+   "cx": 499,
+   "cy": 596,
+   "w": 399,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tsun",
+   "bbox": [
+    100,
+    153,
+    900,
+    846
+   ],
+   "bodyMainAuto": [
+    100,
+    371,
+    900,
+    742
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    371,
+    900,
+    742
+   ],
+   "neck": false
+  },
+  "r28": {
+   "name": "セル・シュル・シェール",
+   "type": "chevre",
+   "cx": 500,
+   "cy": 563,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "nemu",
+   "bbox": [
+    100,
+    183,
+    900,
+    817
+   ],
+   "bodyMainAuto": [
+    100,
+    288,
+    900,
+    737
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    288,
+    900,
+    737
+   ],
+   "neck": false
+  },
+  "r29": {
+   "name": "サント・モール・ド・トゥーレーヌ",
+   "type": "chevre",
+   "cx": 560,
+   "cy": 525,
+   "w": 399,
+   "tilt": -12,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    100,
+    222,
+    900,
+    777
+   ],
+   "bodyMainAuto": [
+    135,
+    366,
+    865,
+    618
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    135,
+    366,
+    865,
+    618
+   ],
+   "neck": false
+  },
+  "r30": {
+   "name": "プリニー・サン・ピエール",
+   "type": "chevre",
+   "cx": 499,
+   "cy": 610,
+   "w": 391,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    108,
+    103,
+    891,
+    897
+   ],
+   "bodyMainAuto": [
+    108,
+    477,
+    891,
+    785
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    108,
+    477,
+    891,
+    785
+   ],
+   "neck": false
+  },
+  "r31": {
+   "name": "クロタン・ド・シャヴィニョル",
+   "type": "chevre",
+   "cx": 499,
+   "cy": 592,
+   "w": 391,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    108,
+    166,
+    892,
+    833
+   ],
+   "bodyMainAuto": [
+    108,
+    254,
+    892,
+    750
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    108,
+    254,
+    892,
+    750
+   ],
+   "neck": false
+  },
+  "r32": {
+   "name": "バノン",
+   "type": "chevre",
+   "cx": 500,
+   "cy": 564,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "maru",
+   "bbox": [
+    100,
+    176,
+    900,
+    823
+   ],
+   "bodyMainAuto": [
+    100,
+    276,
+    900,
+    724
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    276,
+    900,
+    724
+   ],
+   "neck": false
+  },
+  "r33": {
+   "name": "マコネ",
+   "type": "chevre",
+   "cx": 499,
+   "cy": 593,
+   "w": 377,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "nemu",
+   "bbox": [
+    123,
+    167,
+    877,
+    833
+   ],
+   "bodyMainAuto": [
+    123,
+    349,
+    877,
+    769
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    123,
+    349,
+    877,
+    769
+   ],
+   "neck": false
+  },
+  "r34": {
+   "name": "ロカマドゥール",
+   "type": "chevre",
+   "cx": 499,
+   "cy": 592,
+   "w": 399,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "maru",
+   "bbox": [
+    101,
+    167,
+    899,
+    833
+   ],
+   "bodyMainAuto": [
+    101,
+    262,
+    899,
+    744
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    101,
+    262,
+    899,
+    744
+   ],
+   "neck": false
+  },
+  "r35": {
+   "name": "シェヴロタン",
+   "type": "chevre",
+   "cx": 500,
+   "cy": 565,
+   "w": 367,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    100,
+    176,
+    899,
+    824
+   ],
+   "bodyMainAuto": [
+    100,
+    284,
+    899,
+    746
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    284,
+    899,
+    746
+   ],
+   "neck": false
+  },
+  "r36": {
+   "name": "ゴーダ",
+   "type": "semi_hard",
+   "cx": 420,
+   "cy": 680,
+   "w": 411,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    183,
+    900,
+    817
+   ],
+   "bodyMainAuto": [
+    100,
+    279,
+    900,
+    717
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    279,
+    900,
+    717
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r37": {
+   "name": "エダム",
+   "type": "semi_hard",
+   "cx": 388,
+   "cy": 594,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false
+  },
+  "r38": {
+   "name": "チェダー",
+   "type": "semi_hard",
+   "cx": 370,
+   "cy": 594,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "itome",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false
+  },
+  "r39": {
+   "name": "ミモレット",
+   "type": "semi_hard",
+   "cx": 365,
+   "cy": 594,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    100,
+    162,
+    900,
+    838
+   ],
+   "bodyMainAuto": [
+    100,
+    281,
+    900,
+    739
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    281,
+    900,
+    739
+   ],
+   "neck": false
+  },
+  "r40": {
+   "name": "ラクレット・デュ・ヴァレー",
+   "type": "semi_hard",
+   "cx": 388,
+   "cy": 589,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    181,
+    900,
+    819
+   ],
+   "bodyMainAuto": [
+    100,
+    292,
+    900,
+    735
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    292,
+    900,
+    735
+   ],
+   "neck": false
+  },
+  "r41": {
+   "name": "サン・ネクテール",
+   "type": "semi_hard",
+   "cx": 499,
+   "cy": 680,
+   "w": 380,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "nemu",
+   "bbox": [
+    100,
+    180,
+    900,
+    820
+   ],
+   "bodyMainAuto": [
+    100,
+    282,
+    900,
+    722
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    282,
+    900,
+    722
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r42": {
+   "name": "モルビエ",
+   "type": "semi_hard",
+   "cx": 388,
+   "cy": 594,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false
+  },
+  "r43": {
+   "name": "マンチェゴ",
+   "type": "semi_hard",
+   "cx": 499,
+   "cy": 592,
+   "w": 382,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    117,
+    167,
+    883,
+    833
+   ],
+   "bodyMainAuto": [
+    117,
+    238,
+    883,
+    764
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    117,
+    238,
+    883,
+    764
+   ],
+   "neck": false
+  },
+  "r44": {
+   "name": "オッソー・イラティ",
+   "type": "semi_hard",
+   "cx": 388,
+   "cy": 594,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false
+  },
+  "r45": {
+   "name": "テット・ド・モワンヌ",
+   "type": "semi_hard",
+   "cx": 500,
+   "cy": 574,
+   "w": 344,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "itome",
+   "bbox": [
+    126,
+    126,
+    874,
+    873
+   ],
+   "bodyMainAuto": [
+    126,
+    364,
+    874,
+    805
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    126,
+    364,
+    874,
+    805
+   ],
+   "neck": false
+  },
+  "r46": {
+   "name": "パルミジャーノ・レッジャーノ",
+   "type": "hard",
+   "cx": 390,
+   "cy": 596,
+   "w": 361,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "itome",
+   "bbox": [
+    107,
+    157,
+    893,
+    843
+   ],
+   "bodyMainAuto": [
+    107,
+    215,
+    893,
+    781
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    107,
+    215,
+    893,
+    781
+   ],
+   "neck": false
+  },
+  "r47": {
+   "name": "グラナ・パダーノ",
+   "type": "hard",
+   "cx": 420,
+   "cy": 593,
+   "w": 400,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    163,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false
+  },
+  "r48": {
+   "name": "エメンタール",
+   "type": "hard",
+   "cx": 388,
+   "cy": 594,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "nemu",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false
+  },
+  "r49": {
+   "name": "グリュイエール",
+   "type": "hard",
+   "cx": 388,
+   "cy": 591,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "itome",
+   "bbox": [
+    100,
+    175,
+    900,
+    825
+   ],
+   "bodyMainAuto": [
+    100,
+    278,
+    900,
+    733
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    278,
+    900,
+    733
+   ],
+   "neck": false
+  },
+  "r50": {
+   "name": "コンテ",
+   "type": "hard",
+   "cx": 388,
+   "cy": 590,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    177,
+    900,
+    822
+   ],
+   "bodyMainAuto": [
+    100,
+    276,
+    900,
+    721
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    276,
+    900,
+    721
+   ],
+   "neck": false
+  },
+  "r51": {
+   "name": "ボーフォール",
+   "type": "hard",
+   "cx": 380,
+   "cy": 568,
+   "w": 340,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "itome",
+   "bbox": [
+    109,
+    163,
+    891,
+    836
+   ],
+   "bodyMainAuto": [
+    109,
+    249,
+    891,
+    750
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    109,
+    249,
+    891,
+    750
+   ],
+   "neck": false
+  },
+  "r52": {
+   "name": "ペコリーノ・ロマーノ",
+   "type": "hard",
+   "cx": 388,
+   "cy": 594,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "itome",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false
+  },
+  "r53": {
+   "name": "熟成ゴーダ",
+   "type": "hard",
+   "cx": 388,
+   "cy": 594,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false
+  },
+  "r54": {
+   "name": "ミモレット・エクストラヴィエイユ",
+   "type": "hard",
+   "cx": 388,
+   "cy": 597,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "itome",
+   "bbox": [
+    100,
+    151,
+    900,
+    849
+   ],
+   "bodyMainAuto": [
+    100,
+    280,
+    900,
+    739
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    280,
+    900,
+    739
+   ],
+   "neck": false
+  },
+  "r55": {
+   "name": "モッツァレラ・ディ・ブーファラ・カンパーナ",
+   "type": "pasta_filata",
+   "cx": 499,
+   "cy": 588,
+   "w": 412,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    100,
+    131,
+    900,
+    869
+   ],
+   "bodyMainAuto": [
+    100,
+    314,
+    900,
+    776
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    314,
+    900,
+    776
+   ],
+   "neck": false
+  },
+  "r56": {
+   "name": "フィオル・ディ・ラッテ",
+   "type": "pasta_filata",
+   "cx": 499,
+   "cy": 581,
+   "w": 412,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    158,
+    900,
+    842
+   ],
+   "bodyMainAuto": [
+    100,
+    293,
+    900,
+    724
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    293,
+    900,
+    724
+   ],
+   "neck": false
+  },
+  "r57": {
+   "name": "ブッラータ",
+   "type": "pasta_filata",
+   "cx": 499,
+   "cy": 594,
+   "w": 399,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    100,
+    161,
+    900,
+    838
+   ],
+   "bodyMainAuto": [
+    100,
+    450,
+    900,
+    786
+   ],
+   "neckAuto": true,
+   "bodyMain": [
+    100,
+    450,
+    900,
+    786
+   ],
+   "neck": true
+  },
+  "r58": {
+   "name": "スカモルツァ",
+   "type": "pasta_filata",
+   "cx": 499,
+   "cy": 603,
+   "w": 293,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    206,
+    128,
+    794,
+    872
+   ],
+   "bodyMainAuto": [
+    206,
+    440,
+    794,
+    777
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    206,
+    440,
+    794,
+    777
+   ],
+   "neck": true
+  },
+  "r59": {
+   "name": "スカモルツァ・アフミカータ",
+   "type": "pasta_filata",
+   "cx": 499,
+   "cy": 611,
+   "w": 294,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    205,
+    100,
+    795,
+    900
+   ],
+   "bodyMainAuto": [
+    205,
+    455,
+    795,
+    797
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    205,
+    455,
+    795,
+    797
+   ],
+   "neck": true
+  },
+  "r60": {
+   "name": "プロヴォローネ・ドルチェ",
+   "type": "pasta_filata",
+   "cx": 499,
+   "cy": 584,
+   "w": 399,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    100,
+    197,
+    900,
+    803
+   ],
+   "bodyMainAuto": [
+    100,
+    333,
+    900,
+    655
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    333,
+    900,
+    655
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r61": {
+   "name": "プロヴォローネ・ピカンテ",
+   "type": "pasta_filata",
+   "cx": 499,
+   "cy": 611,
+   "w": 303,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    196,
+    100,
+    804,
+    899
+   ],
+   "bodyMainAuto": [
+    196,
+    445,
+    804,
+    791
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    196,
+    445,
+    804,
+    791
+   ],
+   "neck": true
+  },
+  "r62": {
+   "name": "カチョカヴァッロ・シラーノ",
+   "type": "pasta_filata",
+   "cx": 499,
+   "cy": 611,
+   "w": 257,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "nemu",
+   "bbox": [
+    243,
+    100,
+    757,
+    900
+   ],
+   "bodyMainAuto": [
+    243,
+    406,
+    757,
+    790
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    243,
+    406,
+    757,
+    790
+   ],
+   "neck": true
+  },
+  "r63": {
+   "name": "モン・ドール",
+   "type": "washed",
+   "cx": 499,
+   "cy": 700,
+   "w": 399,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    171,
+    900,
+    829
+   ],
+   "bodyMainAuto": [
+    100,
+    270,
+    900,
+    737
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    270,
+    900,
+    737
+   ],
+   "neck": false,
+   "neckY": 1000,
+   "neckScale": 0.6
+  },
+  "r64": {
+   "name": "サレール",
+   "type": "semi_hard",
+   "cx": 390,
+   "cy": 602,
+   "w": 361,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    107,
+    135,
+    893,
+    865
+   ],
+   "bodyMainAuto": [
+    107,
+    224,
+    893,
+    799
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    107,
+    224,
+    893,
+    799
+   ],
+   "neck": false
+  },
+  "r65": {
+   "name": "ボーフォール・シャレ・ダルパージュ",
+   "type": "hard",
+   "cx": 380,
+   "cy": 568,
+   "w": 340,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "itome",
+   "bbox": [
+    113,
+    166,
+    887,
+    834
+   ],
+   "bodyMainAuto": [
+    113,
+    236,
+    887,
+    761
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    113,
+    236,
+    887,
+    761
+   ],
+   "neck": false
+  },
+  "f66": {
+   "name": "あおくなれず",
+   "type": null,
+   "cx": 388,
+   "cy": 594,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tsun",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false
+  },
+  "f67": {
+   "name": "ほったらかし",
+   "type": null,
+   "cx": 500,
+   "cy": 567,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "uru",
+   "bbox": [
+    100,
+    166,
+    900,
+    834
+   ],
+   "bodyMainAuto": [
+    100,
+    265,
+    900,
+    761
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    265,
+    900,
+    761
+   ],
+   "neck": false
+  },
+  "f68": {
+   "name": "ひびわれ",
+   "type": null,
+   "cx": 500,
+   "cy": 567,
+   "w": 365,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tsun",
+   "bbox": [
+    103,
+    161,
+    897,
+    839
+   ],
+   "bodyMainAuto": [
+    103,
+    240,
+    897,
+    762
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    103,
+    240,
+    897,
+    762
+   ],
+   "neck": false
+  },
+  "f69": {
+   "name": "とろけすぎ",
+   "type": null,
+   "cx": 470,
+   "cy": 525,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "nemu",
+   "bbox": [
+    100,
+    154,
+    900,
+    846
+   ],
+   "bodyMainAuto": [
+    100,
+    266,
+    900,
+    736
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    266,
+    900,
+    736
+   ],
+   "neck": false
+  },
+  "f70": {
+   "name": "ふくれっつら",
+   "type": null,
+   "cx": 500,
+   "cy": 566,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tsun",
+   "bbox": [
+    100,
+    167,
+    900,
+    833
+   ],
+   "bodyMainAuto": [
+    100,
+    285,
+    900,
+    730
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    285,
+    900,
+    730
+   ],
+   "neck": false
+  },
+  "f71": {
+   "name": "のびきらず",
+   "type": null,
+   "cx": 500,
+   "cy": 570,
+   "w": 362,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    106,
+    145,
+    894,
+    854
+   ],
+   "bodyMainAuto": [
+    106,
+    250,
+    894,
+    756
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    106,
+    250,
+    894,
+    756
+   ],
+   "neck": false
+  },
+  "f72": {
+   "name": "けむりまみれ",
+   "type": null,
+   "cx": 450,
+   "cy": 665,
+   "w": 330,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tere",
+   "bbox": [
+    100,
+    103,
+    900,
+    897
+   ],
+   "bodyMainAuto": [
+    100,
+    321,
+    900,
+    806
+   ],
+   "neckAuto": true,
+   "bodyMain": [
+    100,
+    321,
+    900,
+    806
+   ],
+   "neck": false
+  },
+  "f73": {
+   "name": "カビもじゃ",
+   "type": null,
+   "cx": 500,
+   "cy": 569,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    100,
+    154,
+    900,
+    846
+   ],
+   "bodyMainAuto": [
+    100,
+    269,
+    900,
+    741
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    269,
+    900,
+    741
+   ],
+   "neck": false
+  },
+  "f74": {
+   "name": "すっぱすぎ",
+   "type": null,
+   "cx": 500,
+   "cy": 573,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "uru",
+   "bbox": [
+    100,
+    135,
+    900,
+    865
+   ],
+   "bodyMainAuto": [
+    100,
+    289,
+    900,
+    747
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    289,
+    900,
+    747
+   ],
+   "neck": false
+  },
+  "o75": {
+   "name": "きまぐれフレッシュ",
+   "type": null,
+   "cx": 500,
+   "cy": 567,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "maru",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    303,
+    900,
+    763
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    303,
+    900,
+    763
+   ],
+   "neck": false
+  },
+  "o76": {
+   "name": "きまぐれ白カビ",
+   "type": null,
+   "cx": 500,
+   "cy": 564,
+   "w": 367,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "maru",
+   "bbox": [
+    100,
+    177,
+    899,
+    823
+   ],
+   "bodyMainAuto": [
+    100,
+    301,
+    899,
+    722
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    301,
+    899,
+    722
+   ],
+   "neck": false
+  },
+  "o77": {
+   "name": "きまぐれ青カビ",
+   "type": null,
+   "cx": 440,
+   "cy": 571,
+   "w": 355,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "tsun",
+   "bbox": [
+    114,
+    145,
+    886,
+    855
+   ],
+   "bodyMainAuto": [
+    114,
+    236,
+    886,
+    759
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    114,
+    236,
+    886,
+    759
+   ],
+   "neck": false
+  },
+  "o78": {
+   "name": "きまぐれウォッシュ",
+   "type": null,
+   "cx": 500,
+   "cy": 576,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    119,
+    900,
+    881
+   ],
+   "bodyMainAuto": [
+    100,
+    390,
+    900,
+    784
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    390,
+    900,
+    784
+   ],
+   "neck": false
+  },
+  "o79": {
+   "name": "きまぐれシェーブル",
+   "type": null,
+   "cx": 500,
+   "cy": 571,
+   "w": 340,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    130,
+    142,
+    870,
+    858
+   ],
+   "bodyMainAuto": [
+    130,
+    195,
+    870,
+    794
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    130,
+    195,
+    870,
+    794
+   ],
+   "neck": false
+  },
+  "o80": {
+   "name": "きまぐれセミハード",
+   "type": null,
+   "cx": 388,
+   "cy": 594,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "futo",
+   "bbox": [
+    100,
+    163,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false
+  },
+  "o81": {
+   "name": "きまぐれハード",
+   "type": null,
+   "cx": 388,
+   "cy": 594,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "itome",
+   "bbox": [
+    100,
+    164,
+    900,
+    836
+   ],
+   "bodyMainAuto": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    259,
+    900,
+    745
+   ],
+   "neck": false
+  },
+  "o82": {
+   "name": "きまぐれのびのび",
+   "type": null,
+   "cx": 500,
+   "cy": 564,
+   "w": 368,
+   "tilt": 0,
+   "sulk": "flip",
+   "vintageArt": false,
+   "checked": "2026-10-17",
+   "faceType": "kira",
+   "bbox": [
+    100,
+    179,
+    900,
+    821
+   ],
+   "bodyMainAuto": [
+    100,
+    297,
+    900,
+    699
+   ],
+   "neckAuto": false,
+   "bodyMain": [
+    100,
+    297,
+    900,
+    699
+   ],
+   "neck": false
+  }
+ }
+}

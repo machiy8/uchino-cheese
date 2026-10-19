@@ -1,0 +1,22 @@
+# 鍵・環境
+.env
+.env.*
+*.key
+# Python
+__pycache__/
+*.pyc
+# 生成画像の作業場所は D:/claude/チーズ育成/art/（リポジトリの外）。誤って置いた場合も入れない
+art_tools/tests/out/
+*_usage.json
+# 署名の鍵・Firebase設定（2026-10-19 追加。リポジトリには絶対に入れない）
+*.keystore
+*.jks
+google-services.json
+# 絵の原本（D:/claude/チーズ育成/art/ に置く。書き出した完成品だけ app/ 側に入れる）
+art/
+# ビルド物
+node_modules/
+dist/
+# 手元の控え（履歴は git に残るので入れない）
+*.bak*
+*_bak-*
