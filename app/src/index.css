@@ -1,0 +1,21 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #582819;
+  background: #fff8ec;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+/* Android 15 の edge-to-edge は safe-area の余白で吸収する */
+.app {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: calc(16px + env(safe-area-inset-top)) calc(16px + env(safe-area-inset-right))
+    calc(16px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));
+  text-align: center;
+}

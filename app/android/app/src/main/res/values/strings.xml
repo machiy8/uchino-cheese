@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">うちのチーズ</string>
+    <string name="title_activity_main">うちのチーズ</string>
+    <string name="package_name">jp.uchinocheese.app</string>
+    <string name="custom_url_scheme">jp.uchinocheese.app</string>
+</resources>
