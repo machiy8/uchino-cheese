@@ -20,9 +20,14 @@ export function elapsedMinutes(from: number, to: number): number {
   return Math.max(0, Math.floor((to - from) / 60000))
 }
 
-/** ゲーム上の日付（4時区切り）を YYYY-MM-DD で返す。端末のローカル時刻で数える */
+/** ゲーム上の日付（4時区切り）を YYYY-MM-DD で返す。端末のローカル時刻で数える
+ *  ローカル時刻で4時未満なら前日にする（固定の時間を引くと夏時間の切替日にずれる） */
 export function gameDay(t: number): string {
-  const d = new Date(t - DAY_START_HOUR * 3600000)
+  const local = new Date(t)
+  const d =
+    local.getHours() < DAY_START_HOUR
+      ? new Date(local.getFullYear(), local.getMonth(), local.getDate() - 1)
+      : local
   const y = d.getFullYear()
   const m = String(d.getMonth() + 1).padStart(2, '0')
   const day = String(d.getDate()).padStart(2, '0')
