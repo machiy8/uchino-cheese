@@ -1,7 +1,12 @@
-import { describe, expect, it, vi } from 'vitest'
-import { advanceDebugClock, elapsedMinutes, gameDay, now } from './time'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { elapsedMinutes, gameDay, now } from './time'
 
 describe('time', () => {
+  // 途中で失敗しても Date.now の差し替えを後のテストに残さない
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
   it('4時で日付が切り替わる', () => {
     expect(gameDay(new Date(2026, 9, 26, 3, 59).getTime())).toBe('2026-10-25')
     expect(gameDay(new Date(2026, 9, 26, 4, 0).getTime())).toBe('2026-10-26')
@@ -19,15 +24,22 @@ describe('time', () => {
     expect(elapsedMinutes(t, t - 60_000)).toBe(0)
   })
 
-  it('now は端末の時刻に「時間を進める」分を足す。進めた分は累積し、0 と負の値は無視する', () => {
+  it('now は端末の時刻に「時間を進める」分を足す。進めた分は累積し、0 と負の値は無視する', async () => {
+    // 進めた分はモジュールの中に残るので、このテスト専用に読み直したモジュールで試す（後のテストに残さない）
+    vi.resetModules()
+    const { advanceDebugClock, now: freshNow } = await import('./time')
     vi.spyOn(Date, 'now').mockReturnValue(1_000_000)
-    expect(now()).toBe(1_000_000)
+    expect(freshNow()).toBe(1_000_000)
     advanceDebugClock(60_000)
     advanceDebugClock(120_000)
-    expect(now()).toBe(1_180_000)
+    expect(freshNow()).toBe(1_180_000)
     advanceDebugClock(0)
     advanceDebugClock(-500_000)
-    expect(now()).toBe(1_180_000)
-    vi.restoreAllMocks()
+    expect(freshNow()).toBe(1_180_000)
+  })
+
+  it('前のテストで進めた分が残らない', () => {
+    vi.spyOn(Date, 'now').mockReturnValue(5_000_000)
+    expect(now()).toBe(5_000_000)
   })
 })

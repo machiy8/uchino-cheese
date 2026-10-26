@@ -1,0 +1,1047 @@
+{
+ "source": "ng_words_v1.txt",
+ "sourceSha256": "db1bdb9718835d211855870160eda0600cd0a22464a802b7fb3f1e4c86ad648d",
+ "normalize": "NFKC → カタカナをひらがなへ → 英字は小文字 → 「ー・〜♪☆！？!?~～･ｰ」を除く",
+ "words": [
+  {
+   "word": "ちんこ",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "ちんぽ",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "ちんちん",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "まんこ",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "おめこ",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "せっくす",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "えっち",
+   "match": "exact",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "えろい",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "えろ",
+   "match": "exact",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "ぱいずり",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "ふぇら",
+   "match": "exact",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "ふぇらちお",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "くんに",
+   "match": "exact",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "くんにりんぐす",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "おなに",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "しこしこ",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "おっぱい",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "ちくび",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "きんたま",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "ぺにす",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "ばいぶ",
+   "match": "exact",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "でぃるど",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "あなる",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "れいぷ",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "ごうかん",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "へんたい",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "ろりこん",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "しょたこん",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "ぱんちら",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "あだると",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "ぬど",
+   "match": "exact",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "そぷらんど",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "でりへる",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "えんこう",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "いんらん",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "18きん",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "精子",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "精液",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "射精",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "勃起",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "陰茎",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "陰部",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "膣",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "乳首",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "巨乳",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "爆乳",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "強姦",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "輪姦",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "痴漢",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "痴女",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "売春",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "買春",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "援交",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "淫乱",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "変態",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "fuck",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "sex",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "porn",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "penis",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "vagina",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "pussy",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "dick",
+   "match": "exact",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "boob",
+   "match": "exact",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "boobs",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "tits",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "nude",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "nipple",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "orgasm",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "blowjob",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "handjob",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "slut",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "whore",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "bitch",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "hentai",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "milf",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "dildo",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "horny",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "xxx",
+   "match": "partial",
+   "category": "① 性的な語"
+  },
+  {
+   "word": "きちがい",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "気違い",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "基地外",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "がいじ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "めくら",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "つんぼ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "びっこ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "ちんば",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "かたわ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "片輪",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "白痴",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "池沼",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "ちえおくれ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "知恵遅れ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "部落",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "えた",
+   "match": "exact",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "非人",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "しなじん",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "支那",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "ちゃんころ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "ちょんこ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "じゃっぷ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "くろんぼ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "黒んぼ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "土人",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "毛唐",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "朝鮮人帰れ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "おかま",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "ほも",
+   "match": "exact",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "れず",
+   "match": "exact",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "なちす",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "ひとら",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "はけんくろいつ",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "nigger",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "nigga",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "chink",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "gook",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "spic",
+   "match": "exact",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "kike",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "faggot",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "retard",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "tranny",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "dyke",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "nazi",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "hitler",
+   "match": "partial",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "jap",
+   "match": "exact",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "fag",
+   "match": "exact",
+   "category": "② 差別語・ヘイト"
+  },
+  {
+   "word": "しね",
+   "match": "exact",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "しねよ",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "しんでしまえ",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "ころすぞ",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "ころしてやる",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "ころされろ",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "ころせ",
+   "match": "exact",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "死ね",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "氏ね",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "たひね",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "殺す",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "殺せ",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "殺害",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "殺人",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "惨殺",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "撲殺",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "刺殺",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "銃殺",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "虐殺",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "虐待",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "拷問",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "ぎゃくさつ",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "ぎゃくたい",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "しにたい",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "死にたい",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "きえたい",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "消えたい",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "じさつ",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "自殺",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "自害",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "りすか",
+   "match": "exact",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "あむか",
+   "match": "exact",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "おばどず",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "首吊り",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "くびつり",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "飛び降り",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "爆破予告",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "ばくはよこく",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "てろりすと",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "てろ",
+   "match": "exact",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "killyourself",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "kys",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "suicide",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "murder",
+   "match": "partial",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "die",
+   "match": "exact",
+   "category": "③ 暴力・自傷をあおる語"
+  },
+  {
+   "word": "運営",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "公式",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "管理者",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "管理人",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "開発者",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "開発元",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "事務局",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "運営者",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "うんえい",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "こうしき",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "かんりにん",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "かんりしゃ",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "かいはつしゃ",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "じむきょく",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "さぽと",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "すたっふ",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "かすたま",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "おしらせ",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "お知らせ",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "警告",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "重要なお知らせ",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "当選",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "本人確認",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "認証",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "ぱすわど",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "ろぐいん",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "あるえぼりゅしょん",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "official",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "administrator",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "admin",
+   "match": "exact",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "moderator",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "support",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "staff",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "developer",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "gm",
+   "match": "exact",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "revolution",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "password",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  },
+  {
+   "word": "login",
+   "match": "partial",
+   "category": "④ 運営・公式を装う語"
+  }
+ ]
+}
