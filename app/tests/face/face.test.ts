@@ -1,6 +1,6 @@
 // 顔の図形の照合：Python（face_parts.shapes()・to_svg()）の答え tests/golden/face_shapes.json と全件比べる
 // 答えを作り直すとき：リポジトリ直下で python -I app/tools/export_faces.py
-// node:fs を使うので src/ の外に置く（tsc -b の型チェックは src/ だけ）
+// node:fs を使うので src/ の外に置く（型チェックは tsconfig.test.json）
 import { readFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { createElement } from 'react'
@@ -9,6 +9,7 @@ import { describe, expect, it } from 'vitest'
 import golden from '../golden/face_shapes.json'
 import facesGenerated from '../../src/data/generated/faces.json'
 import styleGenerated from '../../src/data/generated/face_style.json'
+import speciesGenerated from '../../src/data/generated/species.json'
 import { faceStyle, speciesFaces } from '../../src/face/data'
 import { FaceSvg } from '../../src/face/Face'
 import { lineWidthFor, shapes } from '../../src/face/shapes'
@@ -70,6 +71,18 @@ describe('顔の書き出し', () => {
     expect(golden.exprs).toEqual([...EXPRS])
     expect(cases).toHaveLength(8 * 11)
     expect(new Set(cases.map((c) => `${c.type}/${c.expr}`)).size).toBe(88)
+  })
+
+  it('図鑑（species.json）と顔（faces.json）の ID が過不足なく同じで、名前も同じ', () => {
+    const sp = new Map(speciesGenerated.species.map((s) => [s.id, s.name]))
+    const fs = facesGenerated.faces as Record<string, { name?: string }>
+    const missing = [...sp.keys()].filter((id) => !(id in fs))
+    const extra = Object.keys(fs).filter((id) => !sp.has(id))
+    expect(missing, 'faces.json に無い種').toEqual([])
+    expect(extra, 'species.json に無い顔').toEqual([])
+    expect(sp.size).toBe(82)
+    const wrong = [...sp].filter(([id, name]) => fs[id].name !== undefined && fs[id].name !== name).map(([id]) => id)
+    expect(wrong, '名前が違う種').toEqual([])
   })
 
   it('82種の顔の型が face_style.json の型にある・線の太さが Python と同じ', () => {

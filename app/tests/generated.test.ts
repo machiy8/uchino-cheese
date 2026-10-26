@@ -28,8 +28,9 @@ describe('書き出した JSON', () => {
         'python -I app/tools/export_app_data.py --zukan zukan_tools --ng docs/specs/ng_words_v1.txt --out app/src/data/generated ' +
         'を回し直す',
     ).toEqual([])
-    // NG語辞書も同じ（書き出しの元は docs/specs/ng_words_v1.txt）
-    expect(sha('docs/specs/' + ngWords.source), 'ng_words_v1.txt が書き出した後に変わっている。export_app_data.py を回し直す').toBe(
+    // NG語辞書も同じ。照合先は正本 docs/specs/ng_words_v1.txt に固定する（source から決めると、別のファイルから書き出したときに正本の変更に気づけない）
+    expect(ngWords.source, 'ng_words.json が ng_words_v1.txt 以外から書き出されている').toBe('ng_words_v1.txt')
+    expect(sha('docs/specs/ng_words_v1.txt'), 'ng_words_v1.txt が書き出した後に変わっている。export_app_data.py を回し直す').toBe(
       ngWords.sourceSha256,
     )
   })

@@ -26,6 +26,8 @@ SRC_FACES = ART / "faces.json"
 OUT_STYLE = ROOT / "app" / "src" / "data" / "generated" / "face_style.json"
 OUT_FACES = ROOT / "app" / "src" / "data" / "generated" / "faces.json"
 OUT_GOLDEN = ROOT / "app" / "tests" / "golden" / "face_shapes.json"
+# 図鑑の82種（export_app_data.py の書き出し）。顔の ID・名前と突き合わせる
+SPECIES_JSON = ROOT / "app" / "src" / "data" / "generated" / "species.json"
 
 # 照合に使う線の太さ（顔の幅の千分率）。make_face_types.py の SVG 部品と同じ「顔の幅 w=400‰」のときの値
 GOLDEN_FACE_W = 400
@@ -80,6 +82,27 @@ def num_json(v):
     return round(v, 6) if isinstance(v, float) else v
 
 
+def check_species(faces, species_path):
+    """図鑑（species.json）と顔（faces.json）の ID の集合が同じで、名前も同じか。1件でも違えば止める"""
+    if not species_path.exists():
+        raise SystemExit(f"{rel(species_path)} が無い（先に export_app_data.py で図鑑データを書き出す）")
+    sp = {s["id"]: s["name"] for s in json.loads(species_path.read_text(encoding="utf-8"))["species"]}
+    fs = faces["faces"]
+    errs = []
+    missing = sorted(set(sp) - set(fs))
+    extra = sorted(set(fs) - set(sp))
+    if missing:
+        errs.append("faces.json に無い種: " + "・".join(missing))
+    if extra:
+        errs.append("species.json に無い顔: " + "・".join(extra))
+    for fid in sorted(set(sp) & set(fs)):
+        name = fs[fid].get("name")
+        if name is not None and name != sp[fid]:
+            errs.append(f"{fid} の名前が違う: faces.json「{name}」・species.json「{sp[fid]}」")
+    if errs:
+        raise SystemExit("図鑑と顔が食い違う（art_tools/faces.json か zukan_tools/data.py を直すのはローカル）\n" + "\n".join(errs))
+
+
 def item_json(it):
     path = [[c[0]] + [num_json(v) for v in c[1:]] for c in it[1]]
     if it[0] == "fill":
@@ -131,6 +154,7 @@ def main():
     style = json.loads(SRC_STYLE.read_text(encoding="utf-8"))
     faces = json.loads(SRC_FACES.read_text(encoding="utf-8"))
     validate(style, faces)
+    check_species(faces, SPECIES_JSON)
     FP = load_face_parts()
     outs = {
         OUT_STYLE: dump(with_export(style, SRC_STYLE)),
