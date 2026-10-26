@@ -1,0 +1,187 @@
+{
+ "rule": "短縮後のしきい値（分）＝ TH_MIN×(100−短縮%) // 100（分未満切り捨て・整数演算）",
+ "pcts": [
+  0,
+  3,
+  5,
+  7,
+  10
+ ],
+ "table": [
+  {
+   "time": "T1",
+   "boostPct": 0,
+   "minutes": 30
+  },
+  {
+   "time": "T1",
+   "boostPct": 3,
+   "minutes": 29
+  },
+  {
+   "time": "T1",
+   "boostPct": 5,
+   "minutes": 28
+  },
+  {
+   "time": "T1",
+   "boostPct": 7,
+   "minutes": 27
+  },
+  {
+   "time": "T1",
+   "boostPct": 10,
+   "minutes": 27
+  },
+  {
+   "time": "T2",
+   "boostPct": 0,
+   "minutes": 180
+  },
+  {
+   "time": "T2",
+   "boostPct": 3,
+   "minutes": 174
+  },
+  {
+   "time": "T2",
+   "boostPct": 5,
+   "minutes": 171
+  },
+  {
+   "time": "T2",
+   "boostPct": 7,
+   "minutes": 167
+  },
+  {
+   "time": "T2",
+   "boostPct": 10,
+   "minutes": 162
+  },
+  {
+   "time": "T3",
+   "boostPct": 0,
+   "minutes": 720
+  },
+  {
+   "time": "T3",
+   "boostPct": 3,
+   "minutes": 698
+  },
+  {
+   "time": "T3",
+   "boostPct": 5,
+   "minutes": 684
+  },
+  {
+   "time": "T3",
+   "boostPct": 7,
+   "minutes": 669
+  },
+  {
+   "time": "T3",
+   "boostPct": 10,
+   "minutes": 648
+  },
+  {
+   "time": "T4",
+   "boostPct": 0,
+   "minutes": 1440
+  },
+  {
+   "time": "T4",
+   "boostPct": 3,
+   "minutes": 1396
+  },
+  {
+   "time": "T4",
+   "boostPct": 5,
+   "minutes": 1368
+  },
+  {
+   "time": "T4",
+   "boostPct": 7,
+   "minutes": 1339
+  },
+  {
+   "time": "T4",
+   "boostPct": 10,
+   "minutes": 1296
+  },
+  {
+   "time": "T5",
+   "boostPct": 0,
+   "minutes": 4320
+  },
+  {
+   "time": "T5",
+   "boostPct": 3,
+   "minutes": 4190
+  },
+  {
+   "time": "T5",
+   "boostPct": 5,
+   "minutes": 4104
+  },
+  {
+   "time": "T5",
+   "boostPct": 7,
+   "minutes": 4017
+  },
+  {
+   "time": "T5",
+   "boostPct": 10,
+   "minutes": 3888
+  },
+  {
+   "time": "T6",
+   "boostPct": 0,
+   "minutes": 10080
+  },
+  {
+   "time": "T6",
+   "boostPct": 3,
+   "minutes": 9777
+  },
+  {
+   "time": "T6",
+   "boostPct": 5,
+   "minutes": 9576
+  },
+  {
+   "time": "T6",
+   "boostPct": 7,
+   "minutes": 9374
+  },
+  {
+   "time": "T6",
+   "boostPct": 10,
+   "minutes": 9072
+  },
+  {
+   "time": "T7",
+   "boostPct": 0,
+   "minutes": 20160
+  },
+  {
+   "time": "T7",
+   "boostPct": 3,
+   "minutes": 19555
+  },
+  {
+   "time": "T7",
+   "boostPct": 5,
+   "minutes": 19152
+  },
+  {
+   "time": "T7",
+   "boostPct": 7,
+   "minutes": 18748
+  },
+  {
+   "time": "T7",
+   "boostPct": 10,
+   "minutes": 18144
+  }
+ ]
+}

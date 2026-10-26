@@ -1,0 +1,1866 @@
+{
+ "source": "zukan_tools/data.py（common.build_cards・build_others 経由）",
+ "dataSha256": "aceab9c0fcba3849337516b18489496040abbf1635363393a5ce13127423cf61",
+ "exportedAt": "2026-10-26T00:20:53+00:00",
+ "inputOrder": [
+  "milk",
+  "bac",
+  "press",
+  "room",
+  "time",
+  "care",
+  "finish"
+ ],
+ "inferType": [
+  {
+   "when": {
+    "care": "練る"
+   },
+   "type": "pasta_filata",
+   "id": "o82"
+  },
+  {
+   "when": {
+    "bac": "白カビ"
+   },
+   "type": "white_mold",
+   "id": "o76"
+  },
+  {
+   "when": {
+    "bac": "青カビ"
+   },
+   "type": "blue_mold",
+   "id": "o77"
+  },
+  {
+   "when": {
+    "bac": "ウォッシュ菌"
+   },
+   "type": "washed",
+   "id": "o78"
+  },
+  {
+   "when": {
+    "bac": "穴あき菌"
+   },
+   "type": "hard",
+   "id": "o81"
+  },
+  {
+   "when": {
+    "milk": "山羊"
+   },
+   "type": "chevre",
+   "id": "o79"
+  },
+  {
+   "when": {
+    "press": 0
+   },
+   "type": "fresh",
+   "id": "o75"
+  },
+  {
+   "when": {
+    "press": 3
+   },
+   "type": "hard",
+   "id": "o81"
+  },
+  {
+   "when": {
+    "time": [
+     "T6",
+     "T7"
+    ]
+   },
+   "type": "hard",
+   "id": "o81"
+  },
+  {
+   "when": {},
+   "type": "semi_hard",
+   "id": "o80"
+  }
+ ],
+ "species": [
+  {
+   "id": "r01",
+   "no": 1,
+   "kind": "real",
+   "name": "クリームチーズ",
+   "origin": "アメリカ",
+   "type": "fresh",
+   "rare": 1,
+   "expl": "熟成させない、なめらかで軽い酸味のチーズ",
+   "persona": "のんびり赤ちゃん",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T1",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r02",
+   "no": 2,
+   "kind": "real",
+   "name": "カッテージチーズ",
+   "origin": "—",
+   "type": "fresh",
+   "rare": 1,
+   "expl": "ぽろぽろした粒々の食感。熟成させない",
+   "persona": "すなおな赤ちゃん",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 0,
+    "room": "しっとり",
+    "care": "洗う",
+    "time": "T1",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r03",
+   "no": 3,
+   "kind": "real",
+   "name": "マスカルポーネ",
+   "origin": "イタリア",
+   "type": "fresh",
+   "rare": 1,
+   "expl": "クリーム状のフレッシュ。ティラミスの材料",
+   "persona": "おっとり甘党",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T2",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r04",
+   "no": 4,
+   "kind": "real",
+   "name": "リコッタ",
+   "origin": "イタリア",
+   "type": "fresh",
+   "rare": 2,
+   "expl": "乳清（ホエイ）を再加熱して作るふわふわ",
+   "persona": "ふわふわ泣き虫",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "羊",
+    "bac": "なし",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T1",
+    "finish": "なし"
+   },
+   "detail": "チーズを作ったあとの乳清（ホエイ）を、もう一度温めて固めるふわふわ。ローマの伝統のリコッタ・ロマーナは羊の乳清で作る。"
+  },
+  {
+   "id": "r05",
+   "no": 5,
+   "kind": "real",
+   "name": "ブロッチュ",
+   "origin": "フランス（コルシカ島）",
+   "type": "fresh",
+   "rare": 3,
+   "expl": "乳清から作る唯一のAOPチーズ。島の名物",
+   "persona": "島育ちのはにかみ屋",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "羊",
+    "bac": "なし",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T2",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r06",
+   "no": 6,
+   "kind": "real",
+   "name": "フェタ",
+   "origin": "ギリシャ",
+   "type": "fresh",
+   "rare": 2,
+   "expl": "羊乳主体で塩水に漬け2か月以上熟成",
+   "persona": "しょっぱい照れ屋",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "羊",
+    "bac": "なし",
+    "press": 1,
+    "room": "しっとり",
+    "care": "塩",
+    "time": "T4",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r07",
+   "no": 7,
+   "kind": "real",
+   "name": "カマンベール・ド・ノルマンディ",
+   "origin": "フランス",
+   "type": "white_mold",
+   "rare": 1,
+   "expl": "お玉で5回に分けて型に詰める白カビの代表",
+   "persona": "王道の甘えん坊",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "白カビ",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T4",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r08",
+   "no": 8,
+   "kind": "real",
+   "name": "ブリー・ド・モー",
+   "origin": "フランス",
+   "type": "white_mold",
+   "rare": 2,
+   "expl": "1815年ウィーン会議で「チーズの王」に",
+   "persona": "おおらかな王様",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "白カビ",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T4",
+    "finish": "わら"
+   },
+   "detail": null
+  },
+  {
+   "id": "r09",
+   "no": 9,
+   "kind": "real",
+   "name": "ブリー・ド・ムラン",
+   "origin": "フランス",
+   "type": "white_mold",
+   "rare": 3,
+   "expl": "ブリーの祖先とされ、モーより小さく色濃い",
+   "persona": "ちょっと大人な甘えん坊",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "白カビ",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T5",
+    "finish": "わら"
+   },
+   "detail": null
+  },
+  {
+   "id": "r10",
+   "no": 10,
+   "kind": "real",
+   "name": "シャウルス",
+   "origin": "フランス",
+   "type": "white_mold",
+   "rare": 2,
+   "expl": "14日熟成。クリームとキノコの香り",
+   "persona": "ふんわり内気",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "白カビ",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T3",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r11",
+   "no": 11,
+   "kind": "real",
+   "name": "ヌーシャテル",
+   "origin": "フランス",
+   "type": "white_mold",
+   "rare": 3,
+   "expl": "ノルマンディ最古のチーズ。ハート型もある",
+   "persona": "ロマンチスト",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "白カビ",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T3",
+    "finish": "ハート型"
+   },
+   "detail": null
+  },
+  {
+   "id": "r12",
+   "no": 12,
+   "kind": "real",
+   "name": "ロックフォール",
+   "origin": "フランス",
+   "type": "blue_mold",
+   "rare": 3,
+   "expl": "羊乳の青カビ。1925年に最初の原産地呼称",
+   "persona": "誇り高いツンデレ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "羊",
+    "bac": "青カビ",
+    "press": 0,
+    "room": "しっとり",
+    "care": "針",
+    "time": "T5",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r13",
+   "no": 13,
+   "kind": "real",
+   "name": "ゴルゴンゾーラ・ドルチェ",
+   "origin": "イタリア",
+   "type": "blue_mold",
+   "rare": 2,
+   "expl": "熟成50日以上、まろやかな甘口タイプ",
+   "persona": "やさしいツンデレ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "青カビ",
+    "press": 0,
+    "room": "しっとり",
+    "care": "針",
+    "time": "T4",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r14",
+   "no": 14,
+   "kind": "real",
+   "name": "ゴルゴンゾーラ・ピカンテ",
+   "origin": "イタリア",
+   "type": "blue_mold",
+   "rare": 3,
+   "expl": "熟成80日以上、ピリッと辛口タイプ",
+   "persona": "辛口ツンデレ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "青カビ",
+    "press": 0,
+    "room": "しっとり",
+    "care": "針",
+    "time": "T6",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r15",
+   "no": 15,
+   "kind": "real",
+   "name": "スティルトン",
+   "origin": "イギリス",
+   "type": "blue_mold",
+   "rare": 3,
+   "expl": "英国3州だけで作る。針で空気を通し青く",
+   "persona": "紳士なツンデレ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "青カビ",
+    "press": 0,
+    "room": "しっとり",
+    "care": "針",
+    "time": "T5",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r16",
+   "no": 16,
+   "kind": "real",
+   "name": "フルム・ダンベール",
+   "origin": "フランス",
+   "type": "blue_mold",
+   "rare": 2,
+   "expl": "針で刺して1か月以上。青カビで最もまろやか",
+   "persona": "照れ屋のツンデレ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "青カビ",
+    "press": 1,
+    "room": "しっとり",
+    "care": "針",
+    "time": "T4",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r17",
+   "no": 17,
+   "kind": "real",
+   "name": "ブルー・ドーヴェルニュ",
+   "origin": "フランス",
+   "type": "blue_mold",
+   "rare": 2,
+   "expl": "19世紀半ば、針で青カビを育てる技が生まれた",
+   "persona": "研究熱心なツンデレ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "青カビ",
+    "press": 1,
+    "room": "しっとり",
+    "care": "針",
+    "time": "T5",
+    "finish": "なし"
+   },
+   "detail": "19世紀半ば、ライ麦パンの青カビを針で刺して育てる方法がオーヴェルニュで始まった（AOP規程の記述）。年は規程に書かれていない。"
+  },
+  {
+   "id": "r18",
+   "no": 18,
+   "kind": "real",
+   "name": "エポワス",
+   "origin": "フランス",
+   "type": "washed",
+   "rare": 3,
+   "expl": "修道士生まれ。酒で皮を洗う濃厚な個性派",
+   "persona": "くさいけど情に厚い親分",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "ウォッシュ菌",
+    "press": 0,
+    "room": "しっとり",
+    "care": "洗う",
+    "time": "T4",
+    "finish": "酒"
+   },
+   "detail": "マール（ブドウの搾りかすのブランデー）を混ぜた水で皮を洗う。"
+  },
+  {
+   "id": "r19",
+   "no": 19,
+   "kind": "real",
+   "name": "マンステール",
+   "origin": "フランス",
+   "type": "washed",
+   "rare": 2,
+   "expl": "名は「修道院」から。湿った洞で皮を洗う",
+   "persona": "くさいけど気のいいやつ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "ウォッシュ菌",
+    "press": 0,
+    "room": "しっとり",
+    "care": "洗う",
+    "time": "T4",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r20",
+   "no": 20,
+   "kind": "real",
+   "name": "ポン・レヴェック",
+   "origin": "フランス",
+   "type": "washed",
+   "rare": 2,
+   "expl": "17世紀から四角い形。皮を洗うかブラシで",
+   "persona": "きちょうめんな気のいいやつ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "ウォッシュ菌",
+    "press": 0,
+    "room": "しっとり",
+    "care": "洗う",
+    "time": "T4",
+    "finish": "四角型"
+   },
+   "detail": null
+  },
+  {
+   "id": "r21",
+   "no": 21,
+   "kind": "real",
+   "name": "リヴァロ",
+   "origin": "フランス",
+   "type": "washed",
+   "rare": 3,
+   "expl": "5本の草の帯を巻き「大佐」のあだ名",
+   "persona": "えらそうだけど気のいいやつ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "ウォッシュ菌",
+    "press": 0,
+    "room": "しっとり",
+    "care": "洗う",
+    "time": "T4",
+    "finish": "わら"
+   },
+   "detail": null
+  },
+  {
+   "id": "r22",
+   "no": 22,
+   "kind": "real",
+   "name": "マロワル",
+   "origin": "フランス",
+   "type": "washed",
+   "rare": 2,
+   "expl": "塩水で洗いブラシがけ。自然なオレンジ色",
+   "persona": "北の力持ち",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "ウォッシュ菌",
+    "press": 0,
+    "room": "しっとり",
+    "care": "塩",
+    "time": "T4",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r23",
+   "no": 23,
+   "kind": "real",
+   "name": "ラングル",
+   "origin": "フランス",
+   "type": "washed",
+   "rare": 3,
+   "expl": "上のくぼみに酒を注いで食べることも",
+   "persona": "おもてなし好き",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "ウォッシュ菌",
+    "press": 0,
+    "room": "しっとり",
+    "care": "洗う",
+    "time": "T5",
+    "finish": "酒"
+   },
+   "detail": null
+  },
+  {
+   "id": "r24",
+   "no": 24,
+   "kind": "real",
+   "name": "タレッジョ",
+   "origin": "イタリア",
+   "type": "washed",
+   "rare": 2,
+   "expl": "四角形。週1回ほど塩水で拭き35日以上",
+   "persona": "まじめな気のいいやつ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "ウォッシュ菌",
+    "press": 0,
+    "room": "しっとり",
+    "care": "塩",
+    "time": "T4",
+    "finish": "四角型"
+   },
+   "detail": null
+  },
+  {
+   "id": "r25",
+   "no": 25,
+   "kind": "real",
+   "name": "ルブロション",
+   "origin": "フランス",
+   "type": "washed",
+   "rare": 2,
+   "expl": "洞で15日、トウヒの薄板に載せて熟成",
+   "persona": "山育ちの人なつっこいやつ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "ウォッシュ菌",
+    "press": 1,
+    "room": "しっとり",
+    "care": "洗う",
+    "time": "T3",
+    "finish": "木"
+   },
+   "detail": null
+  },
+  {
+   "id": "r26",
+   "no": 26,
+   "kind": "real",
+   "name": "シェーブル・フレ",
+   "origin": "フランス",
+   "type": "chevre",
+   "rare": 1,
+   "expl": "熟成前の若い山羊乳チーズ。爽やかな酸味",
+   "persona": "きまぐれ山羊っ子（幼）",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "山羊",
+    "bac": "なし",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T1",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r27",
+   "no": 27,
+   "kind": "real",
+   "name": "ヴァランセ",
+   "origin": "フランス",
+   "type": "chevre",
+   "rare": 3,
+   "expl": "塩をして木炭をまぶす。11日目から食べる",
+   "persona": "クールな気まぐれ屋",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "山羊",
+    "bac": "なし",
+    "press": 0,
+    "room": "からっと",
+    "care": "塩",
+    "time": "T3",
+    "finish": "木炭"
+   },
+   "detail": null
+  },
+  {
+   "id": "r28",
+   "no": 28,
+   "kind": "real",
+   "name": "セル・シュル・シェール",
+   "origin": "フランス",
+   "type": "chevre",
+   "rare": 2,
+   "expl": "木炭と塩をまぶし、熟成で青みのカビが出る",
+   "persona": "気まぐれな夢見がち",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "山羊",
+    "bac": "なし",
+    "press": 0,
+    "room": "からっと",
+    "care": "塩",
+    "time": "T4",
+    "finish": "木炭"
+   },
+   "detail": null
+  },
+  {
+   "id": "r29",
+   "no": 29,
+   "kind": "real",
+   "name": "サント・モール・ド・トゥーレーヌ",
+   "origin": "フランス",
+   "type": "chevre",
+   "rare": 3,
+   "expl": "中心にライ麦のわらを通した細長い形",
+   "persona": "まっすぐな気まぐれ屋",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "山羊",
+    "bac": "なし",
+    "press": 0,
+    "room": "からっと",
+    "care": "なし",
+    "time": "T3",
+    "finish": "わら"
+   },
+   "detail": null
+  },
+  {
+   "id": "r30",
+   "no": 30,
+   "kind": "real",
+   "name": "プリニー・サン・ピエール",
+   "origin": "フランス",
+   "type": "chevre",
+   "rare": 3,
+   "expl": "教会の鐘楼に似たピラミッド型とされる",
+   "persona": "背伸びしたい気まぐれ屋",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "山羊",
+    "bac": "なし",
+    "press": 0,
+    "room": "からっと",
+    "care": "塩",
+    "time": "T3",
+    "finish": "ピラミッド型"
+   },
+   "detail": null
+  },
+  {
+   "id": "r31",
+   "no": 31,
+   "kind": "real",
+   "name": "クロタン・ド・シャヴィニョル",
+   "origin": "フランス",
+   "type": "chevre",
+   "rare": 2,
+   "expl": "半乾き〜カチカチまで熟成度で楽しむ",
+   "persona": "小粒な気まぐれ屋",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "山羊",
+    "bac": "なし",
+    "press": 0,
+    "room": "からっと",
+    "care": "なし",
+    "time": "T3",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r32",
+   "no": 32,
+   "kind": "real",
+   "name": "バノン",
+   "origin": "フランス",
+   "type": "chevre",
+   "rare": 3,
+   "expl": "栗の葉で包みラフィアで縛って熟成",
+   "persona": "包まれたがりの気まぐれ屋",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "山羊",
+    "bac": "なし",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T4",
+    "finish": "葉"
+   },
+   "detail": null
+  },
+  {
+   "id": "r33",
+   "no": 33,
+   "kind": "real",
+   "name": "マコネ",
+   "origin": "フランス",
+   "type": "chevre",
+   "rare": 2,
+   "expl": "裏返さずに熟成させる円すい台形の小型",
+   "persona": "ぶどう畑のおっとり屋",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "山羊",
+    "bac": "白カビ",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T3",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r34",
+   "no": 34,
+   "kind": "real",
+   "name": "ロカマドゥール",
+   "origin": "フランス",
+   "type": "chevre",
+   "rare": 2,
+   "expl": "「小さな山羊チーズ」カベクー一族の一口",
+   "persona": "ひとくち甘えん坊",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "山羊",
+    "bac": "なし",
+    "press": 0,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T3",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r35",
+   "no": 35,
+   "kind": "real",
+   "name": "シェヴロタン",
+   "origin": "フランス",
+   "type": "chevre",
+   "rare": 4,
+   "expl": "農家製のみ。ルブロションと縁深い製法",
+   "persona": "めずらしがり屋",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "山羊",
+    "bac": "ウォッシュ菌",
+    "press": 1,
+    "room": "しっとり",
+    "care": "洗う",
+    "time": "T3",
+    "finish": "木"
+   },
+   "detail": null
+  },
+  {
+   "id": "r36",
+   "no": 36,
+   "kind": "real",
+   "name": "ゴーダ",
+   "origin": "オランダ",
+   "type": "semi_hard",
+   "rare": 1,
+   "expl": "28日以上の自然熟成。オランダの代表",
+   "persona": "まじめな働き者",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 2,
+    "room": "からっと",
+    "care": "塩",
+    "time": "T4",
+    "finish": "ワックス"
+   },
+   "detail": null
+  },
+  {
+   "id": "r37",
+   "no": 37,
+   "kind": "real",
+   "name": "エダム",
+   "origin": "オランダ",
+   "type": "semi_hard",
+   "rare": 2,
+   "expl": "ゴーダと並ぶオランダの代表。丸い形が代表",
+   "persona": "まんまる陽気者",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 2,
+    "room": "からっと",
+    "care": "塩",
+    "time": "T5",
+    "finish": "ワックス"
+   },
+   "detail": null
+  },
+  {
+   "id": "r38",
+   "no": 38,
+   "kind": "real",
+   "name": "チェダー",
+   "origin": "イギリス",
+   "type": "semi_hard",
+   "rare": 2,
+   "expl": "カードを積む「チェダリング」で作る",
+   "persona": "堅実な英国紳士",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 2,
+    "room": "からっと",
+    "care": "なし",
+    "time": "T6",
+    "finish": "布"
+   },
+   "detail": null
+  },
+  {
+   "id": "r39",
+   "no": 39,
+   "kind": "real",
+   "name": "ミモレット",
+   "origin": "フランス",
+   "type": "semi_hard",
+   "rare": 3,
+   "expl": "小さなダニ（シロン）が外皮を熟成させる",
+   "persona": "友達の多いオレンジ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 2,
+    "room": "からっと",
+    "care": "なし",
+    "time": "T6",
+    "finish": "シロン"
+   },
+   "detail": null
+  },
+  {
+   "id": "r40",
+   "no": 40,
+   "kind": "real",
+   "name": "ラクレット・デュ・ヴァレー",
+   "origin": "スイス",
+   "type": "semi_hard",
+   "rare": 2,
+   "expl": "トウヒ板の上で3か月以上熟成",
+   "persona": "あったか世話焼き",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 2,
+    "room": "しっとり",
+    "care": "塩",
+    "time": "T5",
+    "finish": "木"
+   },
+   "detail": null
+  },
+  {
+   "id": "r41",
+   "no": 41,
+   "kind": "real",
+   "name": "サン・ネクテール",
+   "origin": "フランス",
+   "type": "semi_hard",
+   "rare": 2,
+   "expl": "ルイ14世も食べた、4〜6週熟成のやわらか",
+   "persona": "上品なのんびり屋",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 1,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T4",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r42",
+   "no": 42,
+   "kind": "real",
+   "name": "モルビエ",
+   "origin": "フランス",
+   "type": "semi_hard",
+   "rare": 3,
+   "expl": "真ん中の黒い1本線は植物の炭",
+   "persona": "ひとすじな頑張り屋",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 2,
+    "room": "しっとり",
+    "care": "なし",
+    "time": "T5",
+    "finish": "木炭"
+   },
+   "detail": null
+  },
+  {
+   "id": "r43",
+   "no": 43,
+   "kind": "real",
+   "name": "マンチェゴ",
+   "origin": "スペイン",
+   "type": "semi_hard",
+   "rare": 2,
+   "expl": "ラ・マンチャの羊乳。30〜60日以上熟成",
+   "persona": "情熱的な旅人",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "羊",
+    "bac": "なし",
+    "press": 2,
+    "room": "からっと",
+    "care": "なし",
+    "time": "T4",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r44",
+   "no": 44,
+   "kind": "real",
+   "name": "オッソー・イラティ",
+   "origin": "フランス",
+   "type": "semi_hard",
+   "rare": 3,
+   "expl": "ピレネーの羊乳。黒さくらんぼのジャムと",
+   "persona": "山の羊飼い気質",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "羊",
+    "bac": "なし",
+    "press": 2,
+    "room": "からっと",
+    "care": "なし",
+    "time": "T5",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r45",
+   "no": 45,
+   "kind": "real",
+   "name": "テット・ド・モワンヌ",
+   "origin": "スイス",
+   "type": "semi_hard",
+   "rare": 3,
+   "expl": "名は「修道士の頭」。削って花びら状に",
+   "persona": "おしゃれな修行僧",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 2,
+    "room": "からっと",
+    "care": "なし",
+    "time": "T5",
+    "finish": "木"
+   },
+   "detail": null
+  },
+  {
+   "id": "r46",
+   "no": 46,
+   "kind": "real",
+   "name": "パルミジャーノ・レッジャーノ",
+   "origin": "イタリア",
+   "type": "hard",
+   "rare": 4,
+   "expl": "無殺菌乳で作り12か月以上熟成",
+   "persona": "頑固なおじいちゃん（長老）",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 3,
+    "room": "からっと",
+    "care": "返す",
+    "time": "T7",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r47",
+   "no": 47,
+   "kind": "real",
+   "name": "グラナ・パダーノ",
+   "origin": "イタリア",
+   "type": "hard",
+   "rare": 3,
+   "expl": "9〜24か月熟成の加熱圧搾ハード",
+   "persona": "面倒見のいいおじさん",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 3,
+    "room": "からっと",
+    "care": "返す",
+    "time": "T6",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r48",
+   "no": 48,
+   "kind": "real",
+   "name": "エメンタール",
+   "origin": "スイス",
+   "type": "hard",
+   "rare": 3,
+   "expl": "プロピオン酸菌のガスで大きな穴が開く",
+   "persona": "穴だらけでも気にしない",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "穴あき菌",
+    "press": 3,
+    "room": "からっと",
+    "care": "返す",
+    "time": "T6",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r49",
+   "no": 49,
+   "kind": "real",
+   "name": "グリュイエール",
+   "origin": "スイス",
+   "type": "hard",
+   "rare": 3,
+   "expl": "トウヒ板の上、塩水で磨いて5か月以上",
+   "persona": "職人肌のおじいちゃん",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 3,
+    "room": "しっとり",
+    "care": "塩",
+    "time": "T6",
+    "finish": "木"
+   },
+   "detail": null
+  },
+  {
+   "id": "r50",
+   "no": 50,
+   "kind": "real",
+   "name": "コンテ",
+   "origin": "フランス",
+   "type": "hard",
+   "rare": 3,
+   "expl": "1個に乳約450L。4か月以上熟成",
+   "persona": "村のまとめ役",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 3,
+    "room": "からっと",
+    "care": "塩",
+    "time": "T6",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r51",
+   "no": 51,
+   "kind": "real",
+   "name": "ボーフォール",
+   "origin": "フランス",
+   "type": "hard",
+   "rare": 3,
+   "expl": "ブナの輪で締め側面がくぼんだ形に",
+   "persona": "山男のおじいちゃん",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 3,
+    "room": "からっと",
+    "care": "なし",
+    "time": "T6",
+    "finish": "木"
+   },
+   "detail": null
+  },
+  {
+   "id": "r52",
+   "no": 52,
+   "kind": "real",
+   "name": "ペコリーノ・ロマーノ",
+   "origin": "イタリア",
+   "type": "hard",
+   "rare": 3,
+   "expl": "羊乳。卓上用5か月、おろし用8か月以上",
+   "persona": "古代ローマ気取り",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "羊",
+    "bac": "なし",
+    "press": 3,
+    "room": "からっと",
+    "care": "塩",
+    "time": "T6",
+    "finish": "なし"
+   },
+   "detail": "熟成18か月以上の「RISERVA」区分が2026年の省令で新設された（MASAF省令2026-03-30）。"
+  },
+  {
+   "id": "r53",
+   "no": 53,
+   "kind": "real",
+   "name": "熟成ゴーダ",
+   "origin": "オランダ",
+   "type": "hard",
+   "rare": 3,
+   "expl": "ゴーダを長く熟成。硬く濃い味に",
+   "persona": "大人になった働き者",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 2,
+    "room": "からっと",
+    "care": "塩",
+    "time": "T6",
+    "finish": "ワックス"
+   },
+   "detail": null
+  },
+  {
+   "id": "r54",
+   "no": 54,
+   "kind": "real",
+   "name": "ミモレット・エクストラヴィエイユ",
+   "origin": "フランス",
+   "type": "hard",
+   "rare": 4,
+   "expl": "18か月を超えて熟成させたミモレット",
+   "persona": "貫禄のオレンジ",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 2,
+    "room": "からっと",
+    "care": "なし",
+    "time": "T7",
+    "finish": "シロン"
+   },
+   "detail": null
+  },
+  {
+   "id": "r55",
+   "no": 55,
+   "kind": "real",
+   "name": "モッツァレラ・ディ・ブーファラ・カンパーナ",
+   "origin": "イタリア",
+   "type": "pasta_filata",
+   "rare": 2,
+   "expl": "水牛乳のカードを熱湯で練って引き伸ばす",
+   "persona": "のびのび元気っ子",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "水牛",
+    "bac": "なし",
+    "press": 0,
+    "room": "しっとり",
+    "care": "練る",
+    "time": "T1",
+    "finish": "なし"
+   },
+   "detail": "水牛の乳のカードを熱湯と混ぜて練り伸ばし、ちぎって成形し、水で締める。"
+  },
+  {
+   "id": "r56",
+   "no": 56,
+   "kind": "real",
+   "name": "フィオル・ディ・ラッテ",
+   "origin": "イタリア",
+   "type": "pasta_filata",
+   "rare": 1,
+   "expl": "牛乳で作るモッツァレラの呼び名",
+   "persona": "のびのび末っ子",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 0,
+    "room": "しっとり",
+    "care": "練る",
+    "time": "T1",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r57",
+   "no": 57,
+   "kind": "real",
+   "name": "ブッラータ",
+   "origin": "イタリア",
+   "type": "pasta_filata",
+   "rare": 3,
+   "expl": "薄い袋の中に生クリームと裂いた生地",
+   "persona": "中身で勝負の元気っ子",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 0,
+    "room": "しっとり",
+    "care": "練る",
+    "time": "T1",
+    "finish": "葉"
+   },
+   "detail": null
+  },
+  {
+   "id": "r58",
+   "no": 58,
+   "kind": "real",
+   "name": "スカモルツァ",
+   "origin": "イタリア",
+   "type": "pasta_filata",
+   "rare": 2,
+   "expl": "ひもで吊るして乾かすひょうたん形",
+   "persona": "ぶらさがり好き",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 0,
+    "room": "からっと",
+    "care": "練る",
+    "time": "T3",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r59",
+   "no": 59,
+   "kind": "real",
+   "name": "スカモルツァ・アフミカータ",
+   "origin": "イタリア",
+   "type": "pasta_filata",
+   "rare": 3,
+   "expl": "スカモルツァを燻製にした香ばしい一品",
+   "persona": "いぶし銀の元気っ子",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 0,
+    "room": "からっと",
+    "care": "練る",
+    "time": "T3",
+    "finish": "燻製"
+   },
+   "detail": null
+  },
+  {
+   "id": "r60",
+   "no": 60,
+   "kind": "real",
+   "name": "プロヴォローネ・ドルチェ",
+   "origin": "イタリア",
+   "type": "pasta_filata",
+   "rare": 2,
+   "expl": "子牛のレンネットで作る甘口。熟成は短め",
+   "persona": "おだやかな元気っ子",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 1,
+    "room": "からっと",
+    "care": "練る",
+    "time": "T3",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r61",
+   "no": 61,
+   "kind": "real",
+   "name": "プロヴォローネ・ピカンテ",
+   "origin": "イタリア",
+   "type": "pasta_filata",
+   "rare": 3,
+   "expl": "子山羊・子羊のレンネットで辛口に",
+   "persona": "ピリッと元気っ子",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 1,
+    "room": "からっと",
+    "care": "練る",
+    "time": "T6",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r62",
+   "no": 62,
+   "kind": "real",
+   "name": "カチョカヴァッロ・シラーノ",
+   "origin": "イタリア",
+   "type": "pasta_filata",
+   "rare": 3,
+   "expl": "南イタリア5州のパスタフィラータ",
+   "persona": "南国ののんびり屋",
+   "season": null,
+   "seasonText": null,
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 1,
+    "room": "からっと",
+    "care": "練る",
+    "time": "T4",
+    "finish": "なし"
+   },
+   "detail": null
+  },
+  {
+   "id": "r63",
+   "no": 63,
+   "kind": "real",
+   "name": "モン・ドール",
+   "origin": "フランス／スイス",
+   "type": "washed",
+   "rare": 4,
+   "expl": "トウヒの箱入り。9月10日〜5月10日だけ",
+   "persona": "冬だけ帰ってくる親戚",
+   "season": {
+    "from": {
+     "month": 9,
+     "day": 10
+    },
+    "to": {
+     "month": 5,
+     "day": 10
+    }
+   },
+   "seasonText": "秋冬（9/10〜5/10）",
+   "recipe": {
+    "milk": "牛",
+    "bac": "ウォッシュ菌",
+    "press": 0,
+    "room": "しっとり",
+    "care": "洗う",
+    "time": "T4",
+    "finish": "木"
+   },
+   "detail": null
+  },
+  {
+   "id": "r64",
+   "no": 64,
+   "kind": "real",
+   "name": "サレール",
+   "origin": "フランス",
+   "type": "semi_hard",
+   "rare": 4,
+   "expl": "放牧期だけ木桶「ジェルル」で作る農家製",
+   "persona": "夏の牧場の働き者",
+   "season": {
+    "from": {
+     "month": 4,
+     "day": 15
+    },
+    "to": {
+     "month": 11,
+     "day": 15
+    }
+   },
+   "seasonText": "春〜秋（4/15〜11/15）",
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 2,
+    "room": "からっと",
+    "care": "なし",
+    "time": "T6",
+    "finish": "木"
+   },
+   "detail": null
+  },
+  {
+   "id": "r65",
+   "no": 65,
+   "kind": "real",
+   "name": "ボーフォール・シャレ・ダルパージュ",
+   "origin": "フランス",
+   "type": "hard",
+   "rare": 4,
+   "expl": "夏の高地の山小屋で1つの群れの乳から",
+   "persona": "夏山の仙人",
+   "season": {
+    "from": {
+     "month": 6,
+     "day": 1
+    },
+    "to": {
+     "month": 10,
+     "day": 31
+    }
+   },
+   "seasonText": "夏（6〜10月）",
+   "recipe": {
+    "milk": "牛",
+    "bac": "なし",
+    "press": 3,
+    "room": "からっと",
+    "care": "なし",
+    "time": "T7",
+    "finish": "木"
+   },
+   "detail": "6〜10月に標高1500m超の山小屋で、1日2回、1つの群れの乳だけで作ったものに限る。"
+  },
+  {
+   "id": "f66",
+   "no": 66,
+   "kind": "fail",
+   "name": "あおくなれず",
+   "failId": "F1",
+   "condText": "青カビなのに「針」以外の手入れ",
+   "expl": "青カビは空気が要る。わざと隙間を作り育てる",
+   "persona": "すねた青二才",
+   "when": {
+    "bac": "青カビ",
+    "care": {
+     "not": [
+      "針"
+     ]
+    }
+   },
+   "detail": null
+  },
+  {
+   "id": "f67",
+   "no": 67,
+   "kind": "fail",
+   "name": "ほったらかし",
+   "failId": "F2",
+   "condText": "ウォッシュ菌なのに「洗う」「塩」以外",
+   "expl": "ウォッシュは塩水や酒で洗って育てるタイプ",
+   "persona": "ぼさぼさの寂しがり",
+   "when": {
+    "bac": "ウォッシュ菌",
+    "care": {
+     "not": [
+      "洗う",
+      "塩"
+     ]
+    }
+   },
+   "detail": null
+  },
+  {
+   "id": "f68",
+   "no": 68,
+   "kind": "fail",
+   "name": "ひびわれ",
+   "failId": "F3",
+   "condText": "カビ系（白・青・ウォッシュ）を「からっと」で熟成",
+   "expl": "カビ系の熟成は湿度が高い部屋で行う",
+   "persona": "乾いた強がり",
+   "when": {
+    "bac": [
+     "白カビ",
+     "青カビ",
+     "ウォッシュ菌"
+    ],
+    "room": "からっと"
+   },
+   "detail": null
+  },
+  {
+   "id": "f69",
+   "no": 69,
+   "kind": "fail",
+   "name": "とろけすぎ",
+   "failId": "F4",
+   "condText": "白カビを7日以上置く",
+   "expl": "白カビは外から中へ熟成。進むと流れるほど",
+   "persona": "とろんと夢見がち",
+   "when": {
+    "bac": "白カビ",
+    "time": [
+     "T6",
+     "T7"
+    ]
+   },
+   "detail": null
+  },
+  {
+   "id": "f70",
+   "no": 70,
+   "kind": "fail",
+   "name": "ふくれっつら",
+   "failId": "F5",
+   "condText": "穴あき菌で圧搾3未満",
+   "expl": "穴の菌（プロピオン酸菌）はハード向き",
+   "persona": "ぷんぷん頬ふくらませ",
+   "when": {
+    "bac": "穴あき菌",
+    "press": [
+     0,
+     1,
+     2
+    ]
+   },
+   "detail": null
+  },
+  {
+   "id": "f71",
+   "no": 71,
+   "kind": "fail",
+   "name": "のびきらず",
+   "failId": "F6",
+   "condText": "「練る」なのに圧搾2以上",
+   "expl": "パスタフィラータは熱湯で練り伸ばして作る",
+   "persona": "かたくなな頑張り屋",
+   "when": {
+    "care": "練る",
+    "press": [
+     2,
+     3
+    ]
+   },
+   "detail": null
+  },
+  {
+   "id": "f72",
+   "no": 72,
+   "kind": "fail",
+   "name": "けむりまみれ",
+   "failId": "F7",
+   "condText": "燻製を3時間以内で仕上げる",
+   "expl": "燻製は形を締めたあと、煙を短く当てる香りづけ",
+   "persona": "けほけほ照れ屋",
+   "when": {
+    "finish": "燻製",
+    "time": [
+     "T1",
+     "T2"
+    ]
+   },
+   "detail": "燻製は、形を作って冷水と塩水で締めたあとに、煙を短く当てる香りづけ。"
+  },
+  {
+   "id": "f73",
+   "no": 73,
+   "kind": "fail",
+   "name": "カビもじゃ",
+   "failId": "F8",
+   "condText": "菌なし・圧搾3・しっとりで「塩」以外",
+   "expl": "ハードは水分を抜いてじっくり熟成させる",
+   "persona": "もじゃもじゃ自由人",
+   "when": {
+    "bac": "なし",
+    "press": 3,
+    "room": "しっとり",
+    "care": {
+     "not": [
+      "塩"
+     ]
+    }
+   },
+   "detail": null
+  },
+  {
+   "id": "f74",
+   "no": 74,
+   "kind": "fail",
+   "name": "すっぱすぎ",
+   "failId": "F9",
+   "condText": "菌なし・圧搾0・しっとりで3日以上（山羊・練るを除く）",
+   "expl": "フレッシュは熟成させず作りたてを味わう",
+   "persona": "すっぱい顔のいじけ屋",
+   "when": {
+    "bac": "なし",
+    "press": 0,
+    "room": "しっとり",
+    "time": [
+     "T5",
+     "T6",
+     "T7"
+    ],
+    "milk": {
+     "not": [
+      "山羊"
+     ]
+    },
+    "care": {
+     "not": [
+      "練る"
+     ]
+    }
+   },
+   "detail": null
+  },
+  {
+   "id": "o75",
+   "no": 75,
+   "kind": "orig",
+   "name": "きまぐれフレッシュ",
+   "type": "fresh",
+   "persona": "よちよち赤ちゃん",
+   "detail": null
+  },
+  {
+   "id": "o76",
+   "no": 76,
+   "kind": "orig",
+   "name": "きまぐれ白カビ",
+   "type": "white_mold",
+   "persona": "ふわふわ甘えん坊",
+   "detail": null
+  },
+  {
+   "id": "o77",
+   "no": 77,
+   "kind": "orig",
+   "name": "きまぐれ青カビ",
+   "type": "blue_mold",
+   "persona": "ツンデレ見習い",
+   "detail": null
+  },
+  {
+   "id": "o78",
+   "no": 78,
+   "kind": "orig",
+   "name": "きまぐれウォッシュ",
+   "type": "washed",
+   "persona": "におう人気者",
+   "detail": null
+  },
+  {
+   "id": "o79",
+   "no": 79,
+   "kind": "orig",
+   "name": "きまぐれシェーブル",
+   "type": "chevre",
+   "persona": "気まぐれ山羊っ子",
+   "detail": null
+  },
+  {
+   "id": "o80",
+   "no": 80,
+   "kind": "orig",
+   "name": "きまぐれセミハード",
+   "type": "semi_hard",
+   "persona": "がんばり屋",
+   "detail": null
+  },
+  {
+   "id": "o81",
+   "no": 81,
+   "kind": "orig",
+   "name": "きまぐれハード",
+   "type": "hard",
+   "persona": "小さな頑固者",
+   "detail": null
+  },
+  {
+   "id": "o82",
+   "no": 82,
+   "kind": "orig",
+   "name": "きまぐれのびのび",
+   "type": "pasta_filata",
+   "persona": "のびのび元気",
+   "detail": null
+  }
+ ]
+}
