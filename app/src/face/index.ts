@@ -1,0 +1,7 @@
+export { faceStyle, speciesFaces } from './data'
+export type { SpeciesFace } from './data'
+export { FaceGroup, FaceSvg, facePlacement } from './Face'
+export { lineWidthFor, shapes } from './shapes'
+export { pathD, toSvg } from './svg'
+export { EXPRS, EXPR_JA } from './types'
+export type { Expr, FaceItem, FaceStyle, Path, PathCmd } from './types'
