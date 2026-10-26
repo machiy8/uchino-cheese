@@ -4,7 +4,7 @@
 正本の手順：docs/実装計画_Phase1.md §2-2・§2-3 の手順1〜2・§5（判定・失敗条件の宣言形・熟成短縮の計算）。
 
 使い方（リポジトリ直下で。Python 3・標準ライブラリだけ）：
-  python -I app/tools/export_app_data.py --zukan zukan_tools --ng docs/specs/ng_words_v1.txt --out app/src/data/generated
+  python -I app/tools/export_app_data.py --zukan zukan_tools --art art_tools --ng docs/specs/ng_words_v1.txt --out app/src/data/generated
 
 書き出すもの：
   <out>/species.json     82種（実在65・失敗9・工房8）。失敗種の条件は宣言形、工房のタイプ推定は上から順の表
@@ -13,12 +13,15 @@
   <out>/ng_words.json    NG語辞書の行頭の印（* 部分一致／= 完全一致／なし＝長さで決める）を解釈した配列
   <golden>/judge_<MMDD>.bin  §5 の16日付。全入力87,360通りの判定結果（種の No を1バイトずつ）
   <golden>/boost_table.json  熟成短縮 7段階×5（0・3・5・7・10%）＝35個
+  顔（--art。処理は export_faces.py と同じ。図鑑の82種と ID・名前を突き合わせてから）：
+  <out>/face_style.json・<out>/faces.json・<golden>/face_shapes.json（8型×11表情＝88通りの図形の答え）
   （<golden> の既定は <out> から見た ../../../tests/golden ＝ app/tests/golden）
 
 止まる条件（1つでも当たれば何も書かずに終わる）：
   - 失敗種の宣言形・タイプ推定の表が、87,360通りのどれかで data.py の lambda／infer_type と違う
   - zukan_tools/out/hints.json の中身が、いまの data.py から作り直したものと違う（ローカルで hint_gen.py を回す）
   - 前回の species.json と比べて、既存IDの名前が変わった・既存IDが消えた（種の番号は変えない：相棒v2 §10-2）
+  - 顔の書き出しの止まる条件（export_faces.py の説明を見る）
 
 入力の並び（判定の答えのバイト位置）：乳4×菌5×圧搾4×庫2×時間7×手入れ6×仕上げ13 の順で、仕上げがいちばん速く回る
 （common.all_inputs と同じ）。値の並びは game_params.json の domains。
@@ -31,6 +34,7 @@ import argparse
 import datetime
 import hashlib
 import importlib
+import importlib.util
 import itertools
 import json
 import os
@@ -318,10 +322,19 @@ def dump(p, obj):
     p.write_text(json.dumps(obj, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
 
 
+def load_export_faces():
+    # python -I ではこのフォルダが sys.path に入らないので、ファイルを直接読み込む
+    spec = importlib.util.spec_from_file_location("export_faces", Path(__file__).resolve().parent / "export_faces.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8")  # -I では PYTHONIOENCODING が効かないため
     ap = argparse.ArgumentParser()
     ap.add_argument("--zukan", required=True, help="zukan_tools のフォルダ")
+    ap.add_argument("--art", required=True, help="art_tools のフォルダ（顔の数値と図形の答えも書き出す）")
     ap.add_argument("--ng", required=True, help="NG語辞書（ng_words_v1.txt）")
     ap.add_argument("--out", required=True, help="JSON の書き出し先（app/src/data/generated）")
     ap.add_argument("--golden", default=None, help="テスト用の答えの書き出し先（既定：<out>/../../../tests/golden）")
@@ -398,6 +411,12 @@ def main():
     if len(boost["table"]) != 35:
         raise Stop(f"短縮表が35個でない：{len(boost['table'])}")
 
+    EF = load_export_faces()
+    try:
+        face_outs, face_summary = EF.build_outputs(a.art, species, out=out, golden=golden)
+    except EF.Stop as e:
+        raise Stop(str(e))
+
     # ---- ここまで止まらなければ書く
     dump(out / "species.json", species_doc)
     dump(out / "hints.json", hints)
@@ -407,12 +426,14 @@ def main():
     for md, b in gold.items():
         (golden / f"judge_{md}.bin").write_bytes(b)
     dump(golden / "boost_table.json", boost)
+    EF.write_outputs(face_outs)
 
     print(f"data.py sha256：{sha}")
     print(f"species.json：{len(species)}種（実在{sum(s['kind'] == 'real' for s in species)}・"
           f"失敗{sum(s['kind'] == 'fail' for s in species)}・工房{sum(s['kind'] == 'orig' for s in species)}）")
     print(f"ng_words.json：{len(ng['words'])}語")
     print(f"golden：judge_*.bin {len(gold)}日付 × {len(next(iter(gold.values()))):,}バイト・boost_table.json {len(boost['table'])}個 → {golden}")
+    print(face_summary)
     if note:
         print(note)
 

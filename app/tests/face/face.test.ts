@@ -1,5 +1,5 @@
 // 顔の図形の照合：Python（face_parts.shapes()・to_svg()）の答え tests/golden/face_shapes.json と全件比べる
-// 答えを作り直すとき：リポジトリ直下で python -I app/tools/export_faces.py
+// 答えを作り直すとき：リポジトリ直下で python -I app/tools/export_app_data.py --zukan zukan_tools --art art_tools --ng docs/specs/ng_words_v1.txt --out app/src/data/generated（顔だけなら python -I app/tools/export_faces.py）
 // node:fs を使うので src/ の外に置く（型チェックは tsconfig.test.json）
 import { readFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
@@ -81,7 +81,7 @@ describe('顔の書き出し', () => {
     expect(missing, 'faces.json に無い種').toEqual([])
     expect(extra, 'species.json に無い顔').toEqual([])
     expect(sp.size).toBe(82)
-    const wrong = [...sp].filter(([id, name]) => fs[id].name !== undefined && fs[id].name !== name).map(([id]) => id)
+    const wrong = [...sp].filter(([id, name]) => fs[id].name !== name).map(([id]) => id)
     expect(wrong, '名前が違う種').toEqual([])
   })
 

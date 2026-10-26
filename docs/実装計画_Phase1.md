@@ -103,10 +103,11 @@ python -I zukan_tools/hint_gen.py                 # zukan_tools/out/hints.json �
 python -I app/tools/export_app_data.py \
     --zukan zukan_tools \
     --art   art_tools \
-    --ng    <ng_words_v1.txt の置き場所> \
+    --ng    docs/specs/ng_words_v1.txt \
     --out   app/src/data/generated
-#    → species/hints/game_params/face_style/ng_words.json と、テスト用の答え（下）を出す
+#    → species/hints/game_params/ng_words.json と face_style/faces.json（--art の顔の書き出し）、テスト用の答え（下）を出す
 #      tests/golden/judge_*.bin（87,360通りの判定）・boost_table.json・face_shapes.json（88通りの図形）
+#    顔だけを書き出し直すときは python -I app/tools/export_faces.py（単独でも動く。species.json が古ければ止まる）
 # 3) 絵を書き出す（新規。art_tools/export_app_assets.py。原本 art/ はローカルにしかないので**ローカルで実行して commit**）
 python -I art_tools/export_app_assets.py --out app/public/assets
 #    → 体82種：512px と 1024px の WebP（2048px の透過PNGは合計約178MB。同梱は縮小版だけ）

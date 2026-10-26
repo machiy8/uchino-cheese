@@ -25,7 +25,7 @@ describe('書き出した JSON', () => {
     expect(
       stale,
       `${stale.join('・')} が書き出した後に変わっている。リポジトリ直下で ` +
-        'python -I app/tools/export_app_data.py --zukan zukan_tools --ng docs/specs/ng_words_v1.txt --out app/src/data/generated ' +
+        'python -I app/tools/export_app_data.py --zukan zukan_tools --art art_tools --ng docs/specs/ng_words_v1.txt --out app/src/data/generated ' +
         'を回し直す',
     ).toEqual([])
     // NG語辞書も同じ。照合先は正本 docs/specs/ng_words_v1.txt に固定する（source から決めると、別のファイルから書き出したときに正本の変更に気づけない）
