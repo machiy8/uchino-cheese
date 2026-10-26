@@ -22,6 +22,9 @@
 
 入力の並び（判定の答えのバイト位置）：乳4×菌5×圧搾4×庫2×時間7×手入れ6×仕上げ13 の順で、仕上げがいちばん速く回る
 （common.all_inputs と同じ）。値の並びは game_params.json の domains。
+元の sha256：species.json の sourceSha256 に data.py・common.py の sha256 を入れる。アプリのテスト（tests/generated.test.ts）が
+今の実ファイルと比べ、違えば「export_app_data.py を回し直す」と出して落ちる。sha はバイト列で取るので、
+改行は .gitattributes で LF にそろえている（Windows の autocrlf でも変わらない）。
 日時：species.json・hints.json の exportedAt は、中身が前回と同じなら前回の値のまま（何度書き出しても差分が出ない）。
 """
 import argparse
@@ -349,6 +352,9 @@ def main():
     species_doc = keep_time(prev_species, {
         "source": "zukan_tools/data.py（common.build_cards・build_others 経由）",
         "dataSha256": sha,
+        # 書き出しの元にしたファイルの sha256（リポジトリ直下からのパス）。アプリのテストが今の実ファイルと照合し、
+        # 書き出し直さないまま data.py・common.py を直したら落ちる（judge_*.bin・boost_table.json も同じ回で書く）
+        "sourceSha256": {"zukan_tools/data.py": sha, "zukan_tools/common.py": sha256_file(zukan / "common.py")},
         "exportedAt": exported_at,
         "inputOrder": SLOTS,
         "inferType": infer,

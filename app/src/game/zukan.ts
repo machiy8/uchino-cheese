@@ -79,6 +79,7 @@ export interface InferTypeRule {
 
 export interface SpeciesFile {
   dataSha256: string
+  sourceSha256: Record<string, string>
   exportedAt: string
   inputOrder: Slot[]
   inferType: InferTypeRule[]

@@ -1,7 +1,11 @@
 {
  "source": "zukan_tools/data.py（common.build_cards・build_others 経由）",
  "dataSha256": "aceab9c0fcba3849337516b18489496040abbf1635363393a5ce13127423cf61",
- "exportedAt": "2026-10-26T00:20:53+00:00",
+ "sourceSha256": {
+  "zukan_tools/data.py": "aceab9c0fcba3849337516b18489496040abbf1635363393a5ce13127423cf61",
+  "zukan_tools/common.py": "59ecc416377fad9f8caf3a4771a89300cd1985074ceadb45aa8579a387713afa"
+ },
+ "exportedAt": "2026-10-26T03:50:55+00:00",
  "inputOrder": [
   "milk",
   "bac",
