@@ -13,6 +13,8 @@ export interface SpeciesFace {
   tilt?: number
   sulk?: string
   vintageArt?: boolean
+  /** 位置を目で確かめた日 */
+  checked?: string
 }
 
 export const faceStyle: FaceStyle = styleJson as unknown as FaceStyle

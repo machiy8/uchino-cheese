@@ -1,0 +1,226 @@
+/* 確認用の図鑑ページ。スマホ縦（幅360px）で一覧は3列、詳細は1列 */
+.zukan-check {
+  box-sizing: border-box;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: calc(12px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right))
+    calc(12px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left));
+}
+
+.zukan-check-head h1 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.zukan-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.zukan-filters select {
+  margin-left: 4px;
+  min-height: 32px;
+  font-size: 13px;
+}
+
+.zukan-count {
+  margin-left: auto;
+}
+
+.zukan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.zukan-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 4px 4px 6px;
+  border: 1px solid #ead9bf;
+  border-radius: 10px;
+  background: #fffdf8;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+
+.zukan-card-no {
+  font-size: 11px;
+  color: #8a6a55;
+}
+
+.zukan-card-name {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.zukan-card-type {
+  font-size: 11px;
+  color: #8a6a55;
+}
+
+.kind {
+  display: inline-block;
+  padding: 0 4px;
+  border-radius: 4px;
+  font-size: 10px;
+}
+.kind-real {
+  background: #f3e3c3;
+}
+.kind-fail {
+  background: #e6dcdc;
+}
+.kind-orig {
+  background: #dde8d6;
+}
+
+/* 体の絵と顔の SVG を同じ大きさで重ねる */
+.figure {
+  position: relative;
+  width: 100%;
+}
+
+.figure img,
+.figure-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.figure-missing {
+  border: 2px dashed #d9b48c;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.figure-missing-label {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  font-size: 12px;
+  color: #b0603a;
+}
+
+.zukan-detail {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  overflow-y: auto;
+  background: #fff8ec;
+}
+
+.zukan-detail-inner {
+  box-sizing: border-box;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: calc(12px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right))
+    calc(16px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left));
+}
+
+.zukan-detail-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.zukan-detail-head h2 {
+  margin: 2px 0 0;
+  font-size: 20px;
+}
+
+.zukan-detail-figure {
+  width: min(100%, 480px);
+  margin: 4px auto 8px;
+}
+
+.btn {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 4px 10px;
+  border: 1px solid #d9b48c;
+  border-radius: 10px;
+  background: #fffdf8;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.btn-close {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.expr-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 6px;
+}
+
+.btn-expr {
+  padding: 4px 2px;
+  white-space: nowrap;
+}
+
+.btn-expr[aria-pressed='true'] {
+  border-color: #582819;
+  background: #f3d9a8;
+  font-weight: 600;
+}
+
+.zukan-detail-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.zukan-detail-nav .btn {
+  flex: 1;
+}
+
+.zukan-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 12px;
+  margin: 0;
+  font-size: 12px;
+  color: #8a6a55;
+}
+
+.zukan-meta dt {
+  font-weight: 600;
+}
+
+.zukan-meta dd {
+  margin: 0;
+}
+
+.build-footer {
+  margin: 16px 0 4px;
+  font-size: 11px;
+  color: #8a6a55;
+  text-align: center;
+}
