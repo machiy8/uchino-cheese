@@ -17,6 +17,18 @@ export const UNUSED_IN_PHASE1 = [
 /** 1024px は先読みせず、使うときに保存（runtime cache）する */
 export const LAZY_SIZE = '1024'
 
+/**
+ * 同じ外す条件をフォルダ（dist からの相対パス）でも持つ。目録の区分の名前が変わっても、置き場所で止められるように
+ * vintage/・vintage_face/・どの区分でも 1024/・重ね絵 D2（どのサイズも）
+ */
+export const EXCLUDE_GLOBS = ['assets/vintage/**', 'assets/vintage_face/**', 'assets/**/1024/**', 'assets/**/D2.webp']
+export const EXCLUDE_PATTERNS = [/^assets\/vintage\//, /^assets\/vintage_face\//, /^assets\/(.+\/)?1024\//, /^assets\/(.+\/)?D2\.webp$/]
+
+/** @param {string} p dist からの相対パス */
+export function excludedByFolder(p) {
+  return EXCLUDE_PATTERNS.some((re) => re.test(p))
+}
+
 /** @param {string | URL} path @returns {AssetManifest} */
 export function readAssetManifest(path) {
   return JSON.parse(readFileSync(path, 'utf-8'))
@@ -38,7 +50,7 @@ export function planAssets(m) {
       const unused = UNUSED_IN_PHASE1.some((u) => u.category === category && (u.id === undefined || u.id === id))
       for (const [size, v] of Object.entries(entry.variants)) {
         const p = `assets/${v.path}`
-        if (unused || size === LAZY_SIZE) exclude.push(p)
+        if (unused || size === LAZY_SIZE || excludedByFolder(p)) exclude.push(p)
         else include.push(p)
       }
     }

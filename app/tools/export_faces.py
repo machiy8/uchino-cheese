@@ -16,8 +16,8 @@
 止まる条件（1つでも当たれば何も書かずに終わる）
 - faces.json の種の数が82でない・faceType が face_style.json に無い・cx/cy/w が正の整数でない・name が無い
 - 図鑑（species.json）と顔の ID の集合や名前が違う
-- 単独で回したとき：species.json の sourceSha256（zukan_tools/data.py・common.py）が今の実ファイルと違う
-  （図鑑データが古い。先に export_app_data.py を回し直す）
+- 単独で回したとき：species.json の sourceSha256 に zukan_tools/data.py・common.py の2つのキーがそろっていない、
+  または今の実ファイルと違う（図鑑データが古い。先に export_app_data.py を回し直す）
 """
 import argparse
 import hashlib
@@ -32,6 +32,8 @@ OUT = ROOT / "app" / "src" / "data" / "generated"
 GOLDEN = ROOT / "app" / "tests" / "golden"
 # 図鑑の82種（export_app_data.py の書き出し）。顔の ID・名前と突き合わせる
 SPECIES_JSON = OUT / "species.json"
+# species.json の sourceSha256 に必ずあるキー（どれかが欠けたら鮮度を確かめられないので止める）
+SPECIES_SOURCES = ("zukan_tools/data.py", "zukan_tools/common.py")
 
 # 照合に使う線の太さ（顔の幅の千分率）。make_face_types.py の SVG 部品と同じ「顔の幅 w=400‰」のときの値
 GOLDEN_FACE_W = 400
@@ -101,6 +103,9 @@ def load_species(species_path):
     src = doc.get("sourceSha256") or {}
     if not src:
         raise Stop(f"{rel(species_path)} に sourceSha256 が無い。先に export_app_data.py を回し直す")
+    missing = [k for k in SPECIES_SOURCES if k not in src]
+    if missing:
+        raise Stop(f"{rel(species_path)} の sourceSha256 に {'・'.join(missing)} が無い。先に export_app_data.py を回し直す")
     stale = [path for path, want in src.items() if not (ROOT / path).is_file() or sha256(ROOT / path) != want]
     if stale:
         raise Stop(f"{rel(species_path)} が古い（{'・'.join(stale)} が書き出した後に変わっている）。"
@@ -203,7 +208,6 @@ def write_outputs(outs):
 
 
 def main():
-    sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true", help="書き出さずに、今のファイルが正本と同じか確かめる")
     a = ap.parse_args()
@@ -220,6 +224,9 @@ def main():
 
 
 if __name__ == "__main__":
+    # -I では PYTHONIOENCODING が効かないため。止まった時の文言（stderr）も Windows で文字化けしないように
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
     try:
         main()
     except Stop as e:

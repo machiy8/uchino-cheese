@@ -331,7 +331,6 @@ def load_export_faces():
 
 
 def main():
-    sys.stdout.reconfigure(encoding="utf-8")  # -I では PYTHONIOENCODING が効かないため
     ap = argparse.ArgumentParser()
     ap.add_argument("--zukan", required=True, help="zukan_tools のフォルダ")
     ap.add_argument("--art", required=True, help="art_tools のフォルダ（顔の数値と図形の答えも書き出す）")
@@ -439,6 +438,9 @@ def main():
 
 
 if __name__ == "__main__":
+    # -I では PYTHONIOENCODING が効かないため。止まった時の文言（stderr）も Windows で文字化けしないように
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
     try:
         main()
     except Stop as e:

@@ -19,3 +19,22 @@ body,
     calc(16px + env(safe-area-inset-bottom)) calc(16px + env(safe-area-inset-left));
   text-align: center;
 }
+
+/* ボタン（押せる所は44px 以上） */
+.btn {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 4px 10px;
+  border: 1px solid #d9b48c;
+  border-radius: 10px;
+  background: #fffdf8;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}

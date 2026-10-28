@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { elapsedMinutes, gameDay, now } from './time'
+import { elapsedMinutes, gameDay, now, parseIso, toIso } from './time'
 
 describe('time', () => {
   // 途中で失敗しても Date.now の差し替えを後のテストに残さない
@@ -36,6 +36,24 @@ describe('time', () => {
     advanceDebugClock(0)
     advanceDebugClock(-500_000)
     expect(freshNow()).toBe(1_180_000)
+  })
+
+  it('進めた分を読める・元に戻すと端末の時刻', async () => {
+    vi.resetModules()
+    const t = await import('./time')
+    vi.spyOn(Date, 'now').mockReturnValue(2_000_000)
+    t.advanceDebugClock(90_000)
+    expect(t.debugClockOffset()).toBe(90_000)
+    t.resetDebugClock()
+    expect(t.debugClockOffset()).toBe(0)
+    expect(t.now()).toBe(2_000_000)
+  })
+
+  it('保存する時刻の書き方（ISO 8601）と読み方は往復する。読めなければ NaN', () => {
+    const t = new Date(2026, 10, 2, 12, 34, 56).getTime()
+    expect(parseIso(toIso(t))).toBe(t)
+    expect(parseIso('2026-11-13T08:00:00+09:00')).toBe(Date.UTC(2026, 10, 12, 23, 0))
+    expect(parseIso('きのう')).toBeNaN()
   })
 
   it('前のテストで進めた分が残らない', () => {

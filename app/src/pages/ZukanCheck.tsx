@@ -1,12 +1,14 @@
 // 確認用の図鑑ページ（W1）。82種を顔つきで並べ、1種を押すと11表情を切り替えて見られる。
-// 当面はアプリのトップに出す。W2 以降で画面の骨組み（S4 図鑑）に置き換える前提で、ここに閉じて作る。
-// 未登録のシルエットの出し分けは W4（今回は全種を見せる）
+// W2 から設定（S8）の「確認用の図鑑ページ」から開く（DEBUG_TOOLS のときだけ）。登録に関係なく全種を見せる
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { bodyImage, type BodySize } from '../assets/catalog'
 import { buildInfo } from '../buildInfo'
-import { EXPRS, EXPR_JA, FaceGroup, faceStyle, lineWidthFor, speciesFaces, type Expr } from '../face'
+import { EXPRS, EXPR_JA, faceStyle, lineWidthFor, speciesFaces, type Expr } from '../face'
 import { speciesFile, type Species } from '../game/zukan'
+import { CheeseFigure } from '../ui/CheeseFigure'
 import './ZukanCheck.css'
+
+// 体の絵＋顔は src/ui/CheeseFigure.tsx に移した（図鑑 S4・取り出し S3c と同じもの）
+export { CheeseFigure }
 
 const KIND_JA: Record<Species['kind'], string> = { real: '実在', fail: '失敗', orig: '工房' }
 const KINDS = Object.keys(KIND_JA) as Species['kind'][]
@@ -16,38 +18,6 @@ const FACE_TYPES = Object.keys(faceStyle.types)
 export const zukanSpecies: Species[] = [...speciesFile.species].sort((a, b) => a.no - b.no)
 
 const pad = (no: number) => String(no).padStart(2, '0')
-
-/** 体の絵＋顔（SVG）。絵が目録に無ければ「絵なし」の枠に顔だけ出す */
-export function CheeseFigure({
-  id,
-  size,
-  expr = 'normal',
-  lazy = false,
-}: {
-  id: string
-  size: BodySize
-  expr?: Expr
-  lazy?: boolean
-}) {
-  const img = bodyImage(id, size)
-  const f = speciesFaces[id]
-  const w = img?.w ?? 1000
-  const h = img?.h ?? 1000
-  return (
-    <div className={img ? 'figure' : 'figure figure-missing'} style={{ aspectRatio: `${w} / ${h}` }} data-id={id}>
-      {img ? (
-        <img src={img.url} width={w} height={h} alt="" loading={lazy ? 'lazy' : undefined} decoding="async" />
-      ) : (
-        <span className="figure-missing-label">絵なし</span>
-      )}
-      {f && (
-        <svg className="figure-face" viewBox={`0 0 ${w} ${h}`} aria-hidden="true">
-          <FaceGroup faceType={f.faceType} expr={expr} faceW={f.w} cx={f.cx} cy={f.cy} tilt={f.tilt} width={w} height={h} />
-        </svg>
-      )}
-    </div>
-  )
-}
 
 export function ZukanList({ items, onOpen }: { items: Species[]; onOpen: (id: string) => void }) {
   return (

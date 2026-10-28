@@ -15,6 +15,16 @@ export function advanceDebugClock(ms: number): void {
   if (ms > 0) offsetMs += ms
 }
 
+/** デバッグ版だけで使う：いま進めている分（ミリ秒） */
+export function debugClockOffset(): number {
+  return offsetMs
+}
+
+/** デバッグ版だけで使う：進めた分を捨てて端末の時刻に戻す */
+export function resetDebugClock(): void {
+  offsetMs = 0
+}
+
 /** 経過分（整数・切り捨て）。時計が戻っていたら 0 */
 export function elapsedMinutes(from: number, to: number): number {
   return Math.max(0, Math.floor((to - from) / 60000))
@@ -32,4 +42,14 @@ export function gameDay(t: number): string {
   const m = String(d.getMonth() + 1).padStart(2, '0')
   const day = String(d.getDate()).padStart(2, '0')
   return `${y}-${m}-${day}`
+}
+
+/** 保存する時刻の書き方（ISO 8601・UTC） */
+export function toIso(t: number): string {
+  return new Date(t).toISOString()
+}
+
+/** 保存した時刻を読む。読めなければ NaN */
+export function parseIso(s: string): number {
+  return Date.parse(s)
 }

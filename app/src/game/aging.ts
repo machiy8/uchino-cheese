@@ -25,3 +25,12 @@ export function boostPctOfLevel(lv: number): number {
   if (p === undefined) throw new Error(`なつき度 Lv は 1〜10: ${lv}`)
   return p
 }
+
+/** なつき度（累計）→ Lv（1〜10）。zukan_tools/common.py の level_of と同じ：しきい値 LV_TH 以上の最大の段 */
+export function levelOf(affection: number): number {
+  let lv = 1
+  gameParams.LV_TH.forEach((t, i) => {
+    if (affection >= t) lv = i + 1
+  })
+  return lv
+}

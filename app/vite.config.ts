@@ -1,7 +1,8 @@
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import { readFileSync } from 'node:fs'
 import { defineConfig } from 'vitest/config'
-import { planAssets, readAssetManifest } from './tools/precache-plan.mjs'
+import { EXCLUDE_GLOBS, planAssets, readAssetManifest } from './tools/precache-plan.mjs'
 
 // どの版かを画面の下に出す（Vercel のビルドだけ VERCEL_GIT_COMMIT_SHA がある）
 const commit = (process.env.VERCEL_GIT_COMMIT_SHA ?? '').slice(0, 7) || 'local'
@@ -14,6 +15,9 @@ const builtAt =
     hour: '2-digit',
     minute: '2-digit',
   }).format(new Date()) + ' JST'
+
+// セーブ文書の meta.appVersion に入れる版（package.json の version）
+const appVersion = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8')).version as string
 
 const assets = planAssets(readAssetManifest(new URL('./public/assets/manifest.json', import.meta.url)))
 
@@ -43,8 +47,8 @@ export default defineConfig({
       workbox: {
         // アプリ本体（JS・CSS・HTML。generated の JSON は JS に入る）と絵の目録・512px の絵（manifest.webmanifest はプラグインが足す）
         globPatterns: ['**/*.{js,css,html}', 'assets/manifest.json', 'assets/**/*.webp'],
-        // 1024px（使うときに保存）と Phase1 で使わない絵（重ね絵 D2・vintage・vintage_face）は外す
-        globIgnores: assets.exclude,
+        // 1024px（使うときに保存）と Phase1 で使わない絵（重ね絵 D2・vintage・vintage_face）は外す（目録の区分とフォルダの両方で）
+        globIgnores: [...assets.exclude, ...EXCLUDE_GLOBS],
         // 絵の URL の ?v=（内容の sha256 の先頭8文字）を外して先読みの中から探す
         ignoreURLParametersMatching: [/^v$/, /^utm_/, /^fbclid$/],
         runtimeCaching: [
@@ -64,6 +68,7 @@ export default defineConfig({
   // Capacitor は dist/ を相対パスで読むので base は './'
   base: './',
   define: {
+    __APP_VERSION__: JSON.stringify(appVersion),
     __APP_COMMIT__: JSON.stringify(commit),
     __APP_BUILT_AT__: JSON.stringify(builtAt),
   },

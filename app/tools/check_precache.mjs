@@ -1,9 +1,10 @@
 // build の最後に、PWA の先読み（precache）の一覧を確かめる（npm run build の中で走る）。
-// 落とす条件：外すべきファイル（1024px・重ね絵 D2・vintage・vintage_face）が1つでも入っている／
-// 図鑑82種の体の 512px がそろっていない／入れるべき絵（512px か1サイズのもの）が欠けている／先読みのファイルが dist に無い
+// 落とす条件：外すべきファイル（1024px・重ね絵 D2・vintage・vintage_face）が1つでも入っている（目録の区分とフォルダの両方で見る）／
+// 図鑑82種の体の 512px がそろっていない／入れるべき絵（512px か1サイズのもの）が欠けている／先読みのファイルが dist に無い／
+// dist/assets の JS・CSS が1つでも先読みに無い／dist の webp が絵の目録（public/assets/manifest.json）に無い
 // 最後に先読みの件数と合計バイト数を出す（PR に書く）
-import { existsSync, readFileSync, statSync } from 'node:fs'
-import { planAssets, readAssetManifest } from './precache-plan.mjs'
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
+import { excludedByFolder, planAssets, readAssetManifest } from './precache-plan.mjs'
 
 const app = new URL('../', import.meta.url)
 const dist = new URL('dist/', app)
@@ -25,6 +26,28 @@ const excluded = plan.exclude.filter((p) => precached.has(p))
 if (excluded.length) errors.push(`外すべきファイルが先読みに入っている（${excluded.length}件）：${excluded.slice(0, 10).join('・')}`)
 const any1024 = urls.filter((u) => /(^|\/)1024\//.test(u))
 if (any1024.length) errors.push(`1024px が先読みに入っている：${any1024.slice(0, 10).join('・')}`)
+const byFolder = urls.filter(excludedByFolder)
+if (byFolder.length)
+  errors.push(`外すフォルダ（vintage/・vintage_face/・*/1024/・D2）のファイルが先読みに入っている（${byFolder.length}件）：${byFolder.slice(0, 10).join('・')}`)
+
+/** dist の中のファイル（dist からの相対パス・/ 区切り） @param {URL} dir @param {string} prefix @returns {string[]} */
+function walk(dir, prefix = '') {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+    e.isDirectory() ? walk(new URL(`${e.name}/`, dir), `${prefix}${e.name}/`) : [`${prefix}${e.name}`],
+  )
+}
+const distFiles = walk(dist)
+
+// アプリ本体（vite の出力 dist/assets/*.js・*.css）は1つ残らず先読みに入れる（欠けるとオフラインで画面が出ない）
+const code = distFiles.filter((p) => p.startsWith('assets/') && /\.(js|css)$/.test(p))
+const codeMissing = code.filter((p) => !precached.has(p))
+if (code.length === 0) errors.push('dist/assets に JS・CSS が無い')
+if (codeMissing.length) errors.push(`dist/assets の JS・CSS が先読みに無い（${codeMissing.length}件）：${codeMissing.slice(0, 10).join('・')}`)
+
+// dist に出た絵は、どれも目録にあるもの（目録に無い絵は、入れるか外すかが決められない）
+const listed = new Set([...plan.include, ...plan.exclude])
+const unlisted = distFiles.filter((p) => p.endsWith('.webp') && !listed.has(p))
+if (unlisted.length) errors.push(`dist の webp が絵の目録に無い（${unlisted.length}件）：${unlisted.slice(0, 10).join('・')}`)
 
 const body512 = species.map((/** @type {{id: string}} */ s) => {
   const v = manifest.categories.body?.[s.id]?.variants['512']
@@ -62,6 +85,7 @@ console.log(`  体の 512px：82種中 ${82 - bodyMissing.length}枚・${kb(body
 console.log(`  そのほかの絵（アイコン・重ね絵・着せ替え・背景・UI）：${kb(assetBytes)}`)
 console.log(`  アプリ本体ほか（JS・CSS・HTML・目録）：${kb(total - bodyBytes - assetBytes)}`)
 console.log(`  外した絵：${plan.exclude.length}件（1024px・重ね絵 D2・vintage・vintage_face）`)
+console.log(`  dist/assets の JS・CSS：${code.length}件・dist の webp：${distFiles.filter((p) => p.endsWith('.webp')).length}件`)
 
 if (errors.length) {
   console.error('先読みの確認で止まりました：\n  ' + errors.join('\n  '))

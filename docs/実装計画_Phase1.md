@@ -68,6 +68,7 @@ Android の戻るボタン：モーダル→閉じる／サブ画面→親／タ
 | `tutorial.step`・`tutorial.done` | 整数・真偽 | チュートリアル途中でアプリを閉じても続きから |
 | `aging[].notifIds` | 整数の配列 | 熟成完了の通知を取り出し時に取り消すため |
 | `notify.absenceScheduled` | 真偽 | 放置の通知（3日目・7日目）を起動のたびに付け替えるため |
+| `aging[].careLast` | 文字列か null（洗う／返す／針／塩） | 手入れの回数が同数のとき、最後に行った方で決めるため（W2） |
 
 - **保存の仕方**（技術判断・自律）
   - 保存場所の抽象化 `SaveStore`：ネイティブ＝`@capacitor/preferences`、Web＝IndexedDB（`idb-keyval`）。**同じ文書を2か所（A・B）に交互に書き**、読むときは壊れていない方のうち `saveSeq` の大きい方を使う（書き込み途中でアプリが落ちても1つ前に戻れる）

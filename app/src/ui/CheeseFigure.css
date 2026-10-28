@@ -1,0 +1,42 @@
+/* 体の絵と顔の SVG を同じ大きさで重ねる */
+.figure {
+  position: relative;
+  width: 100%;
+}
+
+.figure img,
+.figure-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.figure-missing {
+  border: 2px dashed #d9b48c;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.figure-missing-label {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  font-size: 12px;
+  color: #b0603a;
+}
+
+/* 1024px が届くまでの 512px（同じ位置に下から） */
+.figure .figure-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 未登録の実在種：体の形だけ黒く */
+.figure-silhouette img {
+  filter: brightness(0);
+  opacity: 0.55;
+}

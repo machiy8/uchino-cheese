@@ -5,7 +5,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { assetManifest, bodyImage } from '../src/assets/catalog'
 import { speciesFile } from '../src/game/zukan'
-import { planAssets, readAssetManifest } from '../tools/precache-plan.mjs'
+import { excludedByFolder, planAssets, readAssetManifest } from '../tools/precache-plan.mjs'
 
 const assetsDir = new URL('../public/assets/', import.meta.url)
 const sha256 = (u: URL) => createHash('sha256').update(readFileSync(u)).digest('hex')
@@ -50,6 +50,21 @@ describe('PWA の先読みの分け方', () => {
     expect(plan.include.filter((p) => /overlay\/.*D2|vintage/.test(p))).toEqual([])
     expect(plan.exclude).toContain('assets/overlay/512/D2.webp')
     expect(plan.include.filter((p) => p.startsWith('assets/body/512/'))).toHaveLength(82)
+  })
+
+  it('フォルダでも外す：vintage/・vintage_face/・*/1024/・D2。区分で外したものはフォルダでも外れる', () => {
+    expect(
+      ['assets/vintage/512/a.webp', 'assets/vintage_face/512/a.webp', 'assets/new/1024/a.webp', 'assets/overlay/512/D2.webp'].map(
+        excludedByFolder,
+      ),
+    ).toEqual([true, true, true, true])
+    expect(['assets/body/512/r01.webp', 'assets/icon/H01.webp', 'assets/overlay/512/D1.webp'].map(excludedByFolder)).toEqual([
+      false,
+      false,
+      false,
+    ])
+    expect(plan.exclude.every(excludedByFolder)).toBe(true)
+    expect(plan.include.some(excludedByFolder)).toBe(false)
   })
 
   it('目録のファイルはどれも入れるか外すかのどちらか一方', () => {
