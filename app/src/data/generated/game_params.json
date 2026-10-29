@@ -207,5 +207,190 @@
   "r36",
   "r47"
  ],
- "tutorialCard": "r01"
+ "tutorialCard": "r01",
+ "buddy": {
+  "source": "docs/specs/相棒チーズ_仕様_v2.md §1・§2・§6・§10-4",
+  "MOOD_INIT": 70,
+  "MOOD_MIN": 0,
+  "MOOD_MAX": 100,
+  "MOOD_DECAY_AFTER_H": 6,
+  "MOOD_DECAY_PER_H": 2,
+  "MOOD_FACES": {
+   "ごきげん": 80,
+   "にこにこ": 60,
+   "ふつう": 40,
+   "しょんぼり": 20,
+   "すねすね": 0
+  },
+  "ENERGY_INIT": 80,
+  "ENERGY_MIN": 10,
+  "ENERGY_MAX": 100,
+  "ENERGY_DECAY_AFTER_H": 0,
+  "ENERGY_DECAY_PER_H": 3,
+  "ENERGY_SLEEPY_BELOW": 30,
+  "SULK_AFTER_H": 24,
+  "SULK_CLEAR_OPS": [
+   "pet",
+   "talk"
+  ],
+  "SULK_CLEAR_COUNT": 2,
+  "WILD_AFTER_H": [
+   72,
+   168,
+   336
+  ],
+  "WILD_MAX": 3,
+  "WILD_DOWN_PER_CARE": 1,
+  "DAY_BOUNDARY_HOUR": 4,
+  "STAGE_FROM_DAY": {
+   "newborn": 1,
+   "young": 2,
+   "ripe": 15,
+   "vintage": 61
+  },
+  "STAGE_JA": {
+   "newborn": "うまれたて",
+   "young": "若チーズ",
+   "ripe": "食べごろ",
+   "vintage": "ヴィンテージ"
+  },
+  "OPS": {
+   "pet": {
+    "mood": 5,
+    "affection": 1,
+    "energy": 0,
+    "cooldownSec": 10,
+    "dailyMax": 20
+   },
+   "talk": {
+    "mood": 3,
+    "affection": 2,
+    "energy": 0,
+    "cooldownSec": 60,
+    "dailyMax": 10
+   },
+   "feed": {
+    "mood": 5,
+    "affection": 5,
+    "energy": 30,
+    "cooldownSec": 10800,
+    "dailyMax": 3
+   },
+   "care": {
+    "mood": 5,
+    "affection": 5,
+    "energy": 0,
+    "cooldownSec": 21600,
+    "dailyMax": 2,
+    "wild": -1,
+    "wildIgnoresDailyMax": true,
+    "wildIgnoresCooldown": null,
+    "prefBonus": {
+     "affection": 3,
+     "mood": null
+    }
+   },
+   "sleep": {
+    "mood": 0,
+    "affection": 0,
+    "energy": 0,
+    "cooldownSec": 0,
+    "dailyMax": 1,
+    "wake": {
+     "energySet": 100,
+     "mood": 10,
+     "affection": 10
+    }
+   },
+   "sun": {
+    "cooldownSec": 14400,
+    "dailyMax": 2,
+    "like": {
+     "mood": 10,
+     "affection": 5,
+     "energy": 0
+    },
+    "dislike": {
+     "mood": 2,
+     "affection": null,
+     "energy": 0
+    }
+   },
+   "photo": {
+    "mood": 5,
+    "affection": 5,
+    "energy": 0,
+    "cooldownSec": 0,
+    "dailyMax": null,
+    "affectionDailyMax": 1
+   }
+  },
+  "SLEEP_WINDOW": {
+   "fromHour": 20,
+   "toHour": 4
+  },
+  "WAKE_FROM_HOUR": null,
+  "TEMP_PREF": {
+   "fresh": "cool",
+   "white_mold": "cool",
+   "blue_mold": "cool",
+   "chevre": "cool",
+   "washed": "sun",
+   "semi_hard": "sun",
+   "hard": "sun",
+   "pasta_filata": "sun",
+   "fail": "sun",
+   "orig": null
+  },
+  "CARE_PREF": {
+   "washed": "wipe",
+   "semi_hard": "turn",
+   "hard": "turn",
+   "fresh": null,
+   "white_mold": null,
+   "blue_mold": null,
+   "chevre": null,
+   "pasta_filata": null,
+   "fail": null,
+   "orig": null
+  },
+  "HINT_SCENE_FROM_LV": {
+   "talk": 1,
+   "morning": 1,
+   "sun": 4,
+   "care": 7
+  },
+  "REUNION_AFTER_H": 24,
+  "REUNION_AFFECTION": 10,
+  "REUNION_PER_DAY": 1,
+  "REUNION_HINT_AFTER_H": 72,
+  "REUNION_HINTS": 1,
+  "types": [
+   "fresh",
+   "white_mold",
+   "blue_mold",
+   "washed",
+   "chevre",
+   "semi_hard",
+   "hard",
+   "pasta_filata",
+   "fail",
+   "orig"
+  ],
+  "pending": [
+   "OPS.care.wildIgnoresCooldown",
+   "OPS.care.prefBonus.mood",
+   "OPS.sun.dislike.affection",
+   "OPS.photo.dailyMax",
+   "WAKE_FROM_HOUR",
+   "TEMP_PREF.orig",
+   "CARE_PREF.fresh",
+   "CARE_PREF.white_mold",
+   "CARE_PREF.blue_mold",
+   "CARE_PREF.chevre",
+   "CARE_PREF.pasta_filata",
+   "CARE_PREF.fail",
+   "CARE_PREF.orig"
+  ]
+ }
 }
