@@ -10,7 +10,7 @@
   <out>/species.json     82種（実在65・失敗9・工房8）。失敗種の条件は宣言形、工房のタイプ推定は上から順の表
   <out>/hints.json       zukan_tools/out/hints.json（中身が data.py から作り直したものと同じことを確かめてから）
   <out>/game_params.json common.py の数値（しきい値・なつき度・ひらめき・熟成棚・仕上げの解放・はじめてのレシピ帳の順）
-                         と、buddy の下に相棒の数値（common.py の BUDDY_*。null＝d 裁定待ち、その場所の一覧は buddy.pending）
+                         と、buddy の下に相棒の数値（common.py の BUDDY_*。None が残っていたら止まる）
   <out>/ng_words.json    NG語辞書の行頭の印（* 部分一致／= 完全一致／なし＝長さで決める）を解釈した配列
   <golden>/judge_<MMDD>.bin  §5 の16日付。全入力87,360通りの判定結果（種の No を1バイトずつ）
   <golden>/boost_table.json  熟成短縮 7段階×5（0・3・5・7・10%）＝35個
@@ -198,7 +198,7 @@ BUDDY_PREFIX = "BUDDY_"
 
 
 def null_paths(obj, path=""):
-    """値が None（＝d 裁定待ち）の場所を "OPS.care.wildIgnoresCooldown" の形で並べる"""
+    """値が None（＝d 裁定待ち）の場所を "OPS.care.prefBonus.mood" の形で並べる"""
     if obj is None:
         return [path]
     if isinstance(obj, dict):
@@ -207,8 +207,8 @@ def null_paths(obj, path=""):
 
 
 def build_buddy(common):
-    """common.py の BUDDY_* をそのまま（名前から BUDDY_ を外して）載せる。None は JSON の null。
-    pending に null の場所の一覧を付ける（アプリが「決まっていない値」を見落とさないように）"""
+    """common.py の BUDDY_* をそのまま（名前から BUDDY_ を外して）載せる。
+    None（d 裁定待ち）が1つでも残っていたら止まる（2026-10-30 d裁定で全部埋めた）"""
     names = [n for n in vars(common) if n.startswith(BUDDY_PREFIX) and n.isupper()]
     if not names:
         raise Stop("common.py に BUDDY_* の定数が無い")
@@ -219,7 +219,13 @@ def build_buddy(common):
     for key in ("TEMP_PREF", "CARE_PREF"):
         if sorted(buddy[key]) != sorted(buddy["types"]):
             raise Stop(f"BUDDY_{key} のキーがタイプ8つ＋fail＋orig と合わない：{sorted(buddy[key])}")
-    buddy["pending"] = null_paths({k: v for k, v in buddy.items() if k != "source"})
+    for key, vals in (("TEMP_PREF", {"cool", "sun"}), ("CARE_PREF", {"wipe", "turn"})):
+        bad = {k: v for k, v in buddy[key].items() if v not in vals | {common.BUDDY_PREF_INFER}}
+        if bad:
+            raise Stop(f"BUDDY_{key} に無い値：{bad}")
+    pending = null_paths({k: v for k, v in buddy.items() if k != "source"})
+    if pending:
+        raise Stop("BUDDY_* に None（d 裁定待ち）が残っている：" + "・".join(pending))
     return buddy
 
 

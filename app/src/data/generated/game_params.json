@@ -215,6 +215,7 @@
   "MOOD_MAX": 100,
   "MOOD_DECAY_AFTER_H": 6,
   "MOOD_DECAY_PER_H": 2,
+  "MOOD_DECAY_WHILE_SLEEPING": false,
   "MOOD_FACES": {
    "ごきげん": 80,
    "にこにこ": 60,
@@ -227,6 +228,7 @@
   "ENERGY_MAX": 100,
   "ENERGY_DECAY_AFTER_H": 0,
   "ENERGY_DECAY_PER_H": 3,
+  "ENERGY_DECAY_WHILE_SLEEPING": false,
   "ENERGY_SLEEPY_BELOW": 30,
   "SULK_AFTER_H": 24,
   "SULK_CLEAR_OPS": [
@@ -234,6 +236,7 @@
    "talk"
   ],
   "SULK_CLEAR_COUNT": 2,
+  "SULK_CLEAR_GIVES_EFFECTS": true,
   "WILD_AFTER_H": [
    72,
    168,
@@ -242,6 +245,7 @@
   "WILD_MAX": 3,
   "WILD_DOWN_PER_CARE": 1,
   "DAY_BOUNDARY_HOUR": 4,
+  "DAYS_AT_BIRTH": 1,
   "STAGE_FROM_DAY": {
    "newborn": 1,
    "young": 2,
@@ -284,10 +288,10 @@
     "dailyMax": 2,
     "wild": -1,
     "wildIgnoresDailyMax": true,
-    "wildIgnoresCooldown": null,
+    "wildIgnoresCooldown": true,
     "prefBonus": {
      "affection": 3,
-     "mood": null
+     "mood": 0
     }
    },
    "sleep": {
@@ -305,6 +309,8 @@
    "sun": {
     "cooldownSec": 14400,
     "dailyMax": 2,
+    "dislikeUsesDailyMax": true,
+    "hintOn": "firstLikeOfDay",
     "like": {
      "mood": 10,
      "affection": 5,
@@ -312,7 +318,7 @@
     },
     "dislike": {
      "mood": 2,
-     "affection": null,
+     "affection": 0,
      "energy": 0
     }
    },
@@ -321,15 +327,16 @@
     "affection": 5,
     "energy": 0,
     "cooldownSec": 0,
-    "dailyMax": null,
-    "affectionDailyMax": 1
+    "dailyMax": 1
    }
   },
   "SLEEP_WINDOW": {
    "fromHour": 20,
    "toHour": 4
   },
-  "WAKE_FROM_HOUR": null,
+  "WAKE_FROM_HOUR": 4,
+  "SLEEP_UNTIL_WAKE": true,
+  "PREF_INFER": "infer",
   "TEMP_PREF": {
    "fresh": "cool",
    "white_mold": "cool",
@@ -340,19 +347,19 @@
    "hard": "sun",
    "pasta_filata": "sun",
    "fail": "sun",
-   "orig": null
+   "orig": "infer"
   },
   "CARE_PREF": {
+   "fresh": "turn",
+   "white_mold": "wipe",
+   "blue_mold": "turn",
    "washed": "wipe",
+   "chevre": "wipe",
    "semi_hard": "turn",
    "hard": "turn",
-   "fresh": null,
-   "white_mold": null,
-   "blue_mold": null,
-   "chevre": null,
-   "pasta_filata": null,
-   "fail": null,
-   "orig": null
+   "pasta_filata": "turn",
+   "fail": "wipe",
+   "orig": "infer"
   },
   "HINT_SCENE_FROM_LV": {
    "talk": 1,
@@ -365,6 +372,7 @@
   "REUNION_PER_DAY": 1,
   "REUNION_HINT_AFTER_H": 72,
   "REUNION_HINTS": 1,
+  "REUNION_HINT_COUNTS_IN_DAILY": false,
   "types": [
    "fresh",
    "white_mold",
@@ -376,21 +384,6 @@
    "pasta_filata",
    "fail",
    "orig"
-  ],
-  "pending": [
-   "OPS.care.wildIgnoresCooldown",
-   "OPS.care.prefBonus.mood",
-   "OPS.sun.dislike.affection",
-   "OPS.photo.dailyMax",
-   "WAKE_FROM_HOUR",
-   "TEMP_PREF.orig",
-   "CARE_PREF.fresh",
-   "CARE_PREF.white_mold",
-   "CARE_PREF.blue_mold",
-   "CARE_PREF.chevre",
-   "CARE_PREF.pasta_filata",
-   "CARE_PREF.fail",
-   "CARE_PREF.orig"
   ]
  }
 }
