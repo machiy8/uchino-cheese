@@ -68,7 +68,14 @@ Android の戻るボタン：モーダル→閉じる／サブ画面→親／タ
 | `tutorial.step`・`tutorial.done` | 整数・真偽 | チュートリアル途中でアプリを閉じても続きから |
 | `aging[].notifIds` | 整数の配列 | 熟成完了の通知を取り出し時に取り消すため |
 | `notify.absenceScheduled` | 真偽 | 放置の通知（3日目・7日目）を起動のたびに付け替えるため |
-| `aging[].careLast` | 文字列か null（洗う／返す／針／塩） | 手入れの回数が同数のとき、最後に行った方で決めるため（W2） |
+| ~~`aging[].careLast`~~ → `aging[].careSeq` | 手入れごとの整数（洗う・返す・針・塩。枠の中で何回目の手入れだったか・まだなら0） | 手入れの回数が同数のとき、**同数の中で**最後に行った方で決めるため（W2 の careLast は W3 で置き換え。W2 の文書は careLast の手入れを最後として読む） |
+| `buddy.decayAt.mood`・`buddy.decayAt.energy` | 時刻か null | 経過の計算（機嫌・元気）をどこまで済ませたか。1時間単位で進めるので、起動や画面の更新を何回しても二重に減らない（W3） |
+| `buddy.sulkClear` | 整数（0〜2） | すねてから、すねを解く操作（なでる・話しかける）を何回したか（W3） |
+| `buddy.reunionHintPending` | 真偽 | 72時間以上あいて戻ったときのヒント1つの印。中身を開くのは W4（W3） |
+
+- **W3 で入れた相棒v2 §10-2 の項目**：`buddy` の `id`・`speciesId`（null＝まだ相棒がいない）・`birthDate`・`daysTogether`・`lastActiveDay`・`lastInteractionAt`・`mood`・`affection`・`energy`・`wild`・`sulking`・`sleep`（`isSleeping`・`sleptAt`）・`daily`（`day`・`counts`・`lastAt`・`affectionGained`・`reunionBonusGiven`・`hintsGiven`）・`wildAlbum`。`daily.lastAt` は日付が変わっても残す（クールダウンが4時をまたいでも続くように）
+- 入れていないもの：`type`・`stage`・`affectionLevel`・`preferences` は派生値（species.json・日数・累計・game_params の TEMP_PREF／CARE_PREF から毎回計算）なので保存しない。`nickname`・`nicknameUpdatedAt`・`outfit`・`photos`・`milestones`・`hallOfFame`・`daily.adHints`・`counts.photo` は W6 以降
+- W2 の文書（`buddy` が `affection` だけ）を読んだら、足りない項目は初期値で埋める（項目が無い＝初期値、あるのに形が違う＝壊れている扱い）。schemaVersion は2のまま
 
 - **保存の仕方**（技術判断・自律）
   - 保存場所の抽象化 `SaveStore`：ネイティブ＝`@capacitor/preferences`、Web＝IndexedDB（`idb-keyval`）。**同じ文書を2か所（A・B）に交互に書き**、読むときは壊れていない方のうち `saveSeq` の大きい方を使う（書き込み途中でアプリが落ちても1つ前に戻れる）

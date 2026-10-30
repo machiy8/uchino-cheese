@@ -102,6 +102,72 @@ export interface GameParams {
   FIN_UNLOCK: Record<string, number>
   starterCards: string[]
   tutorialCard: string
+  buddy: BuddyParams
+}
+
+interface OpEffect {
+  mood: number
+  affection: number
+  energy: number
+}
+
+/** game_params.json の buddy（正本は zukan_tools/common.py の BUDDY_*。決め方は「d裁定 10/30」のコメント） */
+export interface BuddyParams {
+  MOOD_INIT: number
+  MOOD_MIN: number
+  MOOD_MAX: number
+  MOOD_DECAY_AFTER_H: number
+  MOOD_DECAY_PER_H: number
+  MOOD_DECAY_WHILE_SLEEPING: boolean
+  MOOD_FACES: Record<string, number>
+  ENERGY_INIT: number
+  ENERGY_MIN: number
+  ENERGY_MAX: number
+  ENERGY_DECAY_AFTER_H: number
+  ENERGY_DECAY_PER_H: number
+  ENERGY_DECAY_WHILE_SLEEPING: boolean
+  ENERGY_SLEEPY_BELOW: number
+  SULK_AFTER_H: number
+  SULK_CLEAR_OPS: string[]
+  SULK_CLEAR_COUNT: number
+  SULK_CLEAR_GIVES_EFFECTS: boolean
+  WILD_AFTER_H: number[]
+  WILD_MAX: number
+  WILD_DOWN_PER_CARE: number
+  DAY_BOUNDARY_HOUR: number
+  DAYS_AT_BIRTH: number
+  STAGE_FROM_DAY: Record<string, number>
+  STAGE_JA: Record<string, string>
+  OPS: {
+    pet: OpEffect & { cooldownSec: number; dailyMax: number }
+    talk: OpEffect & { cooldownSec: number; dailyMax: number }
+    feed: OpEffect & { cooldownSec: number; dailyMax: number }
+    care: OpEffect & {
+      cooldownSec: number
+      dailyMax: number
+      wild: number
+      wildIgnoresDailyMax: boolean
+      wildIgnoresCooldown: boolean
+      prefBonus: { affection: number; mood: number }
+    }
+    sleep: OpEffect & { cooldownSec: number; dailyMax: number; wake: { energySet: number; mood: number; affection: number } }
+    sun: { cooldownSec: number; dailyMax: number; dislikeUsesDailyMax: boolean; hintOn: string; like: OpEffect; dislike: OpEffect }
+    photo: OpEffect & { cooldownSec: number; dailyMax: number }
+  }
+  SLEEP_WINDOW: { fromHour: number; toHour: number }
+  WAKE_FROM_HOUR: number
+  SLEEP_UNTIL_WAKE: boolean
+  PREF_INFER: string
+  TEMP_PREF: Record<string, string>
+  CARE_PREF: Record<string, string>
+  HINT_SCENE_FROM_LV: Record<string, number>
+  REUNION_AFTER_H: number
+  REUNION_AFFECTION: number
+  REUNION_PER_DAY: number
+  REUNION_HINT_AFTER_H: number
+  REUNION_HINTS: number
+  REUNION_HINT_COUNTS_IN_DAILY: boolean
+  types: string[]
 }
 
 // JSON の型推定は配列の要素ごとに形が割れるので、上の型として読む（形の確かめは tests/ の照合で行う）

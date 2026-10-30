@@ -5,7 +5,8 @@
 import { boostPctOfLevel, levelOf, shortThresholds } from './aging'
 import { judge, monthDayOf } from './judge'
 import { elapsedMinutes, gameDay, parseIso, toIso } from './time'
-import { CARE_BUTTONS, type AgingSlot, type CareButton, type CareKey, type GameState } from './state'
+import { birth } from './buddy'
+import { CARE_BUTTONS, GameError, type AgingSlot, type CareButton, type CareKey, type GameState } from './state'
 import { gameParams, TIME_KEYS, type Recipe, type Species, type TimeKey } from './zukan'
 
 export interface PrepInput {
@@ -17,7 +18,21 @@ export interface PrepInput {
   knead: boolean
 }
 
-export class GameError extends Error {}
+export { GameError }
+
+/** 取り出しを押したときの段が、画面に出ていた段と違った（確定しない。画面を更新してもう一度押してもらう） */
+export class StageChangedError extends GameError {
+  readonly stage: TimeKey | null
+  constructor(stage: TimeKey | null) {
+    super('取り出しの段が変わった')
+    this.stage = stage
+  }
+}
+
+/** 枠の中で次の手入れが何回目か（careSeq の最大＋1） */
+function nextCareSeq(a: AgingSlot): number {
+  return Math.max(0, ...CARE_BUTTONS.map((c) => a.careSeq[c])) + 1
+}
 
 function checkDomain(slot: 'milk' | 'bac' | 'press' | 'room', v: string | number): void {
   if (!gameParams.domains[slot].includes(v)) throw new GameError(`${slot} の値が選択肢に無い: ${v}`)
@@ -51,7 +66,7 @@ export function startAging(s: GameState, input: PrepInput, now: number, slot?: n
     startedAt: toIso(now),
     input: { milk: input.milk, bac: input.bac, press: input.press, room: input.room, finish: null },
     careLog: { 洗う: 0, 返す: 0, 針: 0, 塩: 0, 練る: input.knead ? 1 : 0 },
-    careLast: null,
+    careSeq: { 洗う: 0, 返す: 0, 針: 0, 塩: 0 },
     boostPct: boostPctOfLevel(levelOf(s.buddy.affection)),
   }
   const aging = [...s.aging, entry].sort((a, b) => a.slot - b.slot)
@@ -62,22 +77,25 @@ export function startAging(s: GameState, input: PrepInput, now: number, slot?: n
 export function addCare(s: GameState, slot: number, care: CareButton): GameState {
   if (!CARE_BUTTONS.includes(care)) throw new GameError(`お手入れの値が違う: ${care}`)
   const a = slotOf(s, slot)
-  const next: AgingSlot = { ...a, careLog: { ...a.careLog, [care]: a.careLog[care] + 1 }, careLast: care }
+  const next: AgingSlot = {
+    ...a,
+    careLog: { ...a.careLog, [care]: a.careLog[care] + 1 },
+    careSeq: { ...a.careSeq, [care]: nextCareSeq(a) },
+  }
   return { ...s, aging: s.aging.map((x) => (x.slot === slot ? next : x)) }
 }
 
 /**
  * 判定に使う手入れ。練るをしたら「練る」（他より優先）。そうでなければ一番多い手入れ、
- * 同数なら careLast の方、0回なら「なし」。
- * careLast が同数の中に無いとき（例：洗う2・返す2・最後は針）は CARE_BUTTONS の順（洗う→返す→針→塩）で先の方
+ * 同数なら、その中で最後に行った方（careSeq の大きい方）、0回なら「なし」。
+ * 例：洗う2・返す2・最後は針 → 洗うと返すのうち後に行った方
  */
-export function decideCare(a: Pick<AgingSlot, 'careLog' | 'careLast'>): CareKey | 'なし' {
+export function decideCare(a: Pick<AgingSlot, 'careLog' | 'careSeq'>): CareKey | 'なし' {
   if (a.careLog['練る'] > 0) return '練る'
   const max = Math.max(...CARE_BUTTONS.map((c) => a.careLog[c]))
   if (max <= 0) return 'なし'
   const top = CARE_BUTTONS.filter((c) => a.careLog[c] === max)
-  if (a.careLast && top.includes(a.careLast)) return a.careLast
-  return top[0]
+  return top.reduce((x, y) => (a.careSeq[y] > a.careSeq[x] ? y : x))
 }
 
 export function startedAtMs(a: AgingSlot): number {
@@ -147,12 +165,19 @@ export interface HarvestResult {
   recipe: Recipe
   /** はじめて図鑑に登録した種か */
   isNew: boolean
+  /** 相棒がいなかったので、このチーズが相棒になった */
+  born: boolean
 }
 
-/** 取り出す：仕上げを選ぶ → 判定（月日は取り出した時のゲーム日）→ 図鑑に登録 → 枠を空ける */
-export function harvest(s: GameState, slot: number, finish: string, now: number): HarvestResult {
+/**
+ * 取り出す：仕上げを選ぶ → 判定（月日は取り出した時のゲーム日）→ 図鑑に登録 → 枠を空ける。
+ * 相棒がいなければ、取り出したチーズが相棒になる（相棒の誕生）。
+ * expectStage を渡すと、押した時刻の段がそれと違うとき StageChangedError で止める（何も変えない）
+ */
+export function harvest(s: GameState, slot: number, finish: string, now: number, expectStage?: TimeKey | null): HarvestResult {
   const a = slotOf(s, slot)
   const stage = harvestStage(a, now)
+  if (expectStage !== undefined && stage !== expectStage) throw new StageChangedError(stage)
   if (stage === null) throw new GameError('まだ取り出せない（30分もの の前）')
   if (!isFinishUnlocked(finish, registeredCount(s))) throw new GameError(`仕上げ「${finish}」はまだ解放されていない`)
   const recipe: Recipe = {
@@ -171,10 +196,13 @@ export function harvest(s: GameState, slot: number, finish: string, now: number)
     ...s.zukan.registered,
     [species.id]: prev ? { ...prev, count: prev.count + 1 } : { firstAt: day, count: 1 },
   }
+  const next: GameState = { ...s, zukan: { ...s.zukan, registered }, aging: s.aging.filter((x) => x.slot !== slot) }
+  const born = s.buddy.speciesId === null
   return {
-    state: { ...s, zukan: { ...s.zukan, registered }, aging: s.aging.filter((x) => x.slot !== slot) },
+    state: born ? birth(next, species.id, now) : next,
     species,
     recipe,
     isNew: !prev,
+    born,
   }
 }

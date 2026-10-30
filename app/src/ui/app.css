@@ -381,3 +381,255 @@
 .sub-full {
   margin: calc(-12px - env(safe-area-inset-top)) -12px 0;
 }
+
+/* ホーム S2（相棒） */
+.buddy-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.buddy-name {
+  margin: 4px 0;
+  font-size: 20px;
+}
+
+.buddy-species {
+  margin-left: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #8a6a55;
+}
+
+.buddy-days {
+  margin: 0;
+  font-size: 13px;
+}
+
+.buddy-days strong {
+  font-size: 18px;
+}
+
+.buddy-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.buddy-stats > div {
+  padding: 6px 8px;
+  border: 1px solid #ead9bf;
+  border-radius: 10px;
+  background: #fffdf8;
+}
+
+.buddy-stats dt {
+  font-size: 11px;
+  color: #8a6a55;
+}
+
+.buddy-stats dd {
+  margin: 2px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.stat-sub {
+  margin-left: 4px;
+  font-size: 11px;
+  font-weight: 400;
+  color: #8a6a55;
+}
+
+.heart {
+  margin-right: 2px;
+  color: #e0607a;
+}
+
+.energy-bar {
+  display: inline-block;
+  width: 48px;
+  height: 8px;
+  border-radius: 4px;
+  background: #f0e2cc;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.energy-bar > span {
+  display: block;
+  height: 100%;
+  background: #e0a24a;
+}
+
+.buddy-stage {
+  position: relative;
+  display: block;
+  width: min(100%, 300px);
+  margin: 4px auto 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.buddy-stage:active .buddy-figure {
+  transform: scale(0.97);
+}
+
+.buddy-figure {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.12s;
+}
+
+.zzz {
+  position: absolute;
+  top: 8%;
+  right: 10%;
+  font-size: 20px;
+  font-weight: 700;
+  color: #8a6a55;
+}
+
+.bubble {
+  min-height: 64px;
+  margin: 4px 0 10px;
+  padding: 8px 12px;
+  border: 1px solid #ead9bf;
+  border-radius: 14px;
+  background: #fffdf8;
+  text-align: center;
+}
+
+.bubble-text {
+  margin: 2px 0;
+  font-size: 15px;
+}
+
+.bubble-hint {
+  color: #8a6a55;
+  font-size: 13px;
+}
+
+.bubble-note {
+  margin: 2px 0;
+  font-size: 12px;
+  color: #8a6a55;
+}
+
+.bubble-up {
+  color: #b8742c;
+  font-weight: 600;
+}
+
+.bubble-trivia {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: #8a6a55;
+}
+
+.buddy-ops {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+/* 1段目：話しかける・ごはん・寝かせる（3つ）／2段目：お手入れ2つ／3段目：日向ぼっこ・ひんやり */
+.buddy-ops .btn {
+  grid-column: span 2;
+}
+
+.buddy-ops .btn[data-op='care'],
+.buddy-ops .btn[data-op='sun'] {
+  grid-column: span 3;
+}
+
+.buddy-ops .btn {
+  min-height: 48px;
+  padding: 4px;
+  font-size: 13px;
+}
+
+.op-pref {
+  display: block;
+  font-size: 10px;
+  color: #e0607a;
+}
+
+.harvest-note {
+  padding: 8px;
+  border-radius: 8px;
+  background: #f6d0c0;
+  font-size: 13px;
+}
+
+.badge-born {
+  background: #f3c77d;
+}
+
+/* おかえり（モーダル） */
+.modal-back {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(60, 30, 10, 0.35);
+}
+
+.modal {
+  width: min(100%, 360px);
+  box-sizing: border-box;
+  padding: 20px 16px 16px;
+  border-radius: 16px;
+  background: #fffdf8;
+  text-align: center;
+}
+
+.modal-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.modal-line {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+/* 設定のデバッグ（相棒） */
+.debug-row,
+.debug-values {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+  font-size: 13px;
+}
+
+.debug-row select {
+  flex: 1 1 160px;
+  min-height: 44px;
+  font: inherit;
+}
+
+.debug-values label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.debug-values input {
+  width: 64px;
+  min-height: 40px;
+  font: inherit;
+}

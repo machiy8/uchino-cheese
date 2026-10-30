@@ -2,24 +2,33 @@
 // 遷移は実装計画 §1-2。Android の戻るボタンは W5
 import { useEffect, useState } from 'react'
 import { DEBUG_TOOLS } from './config'
-import { addCare, harvest, startAging, type HarvestResult } from './game/cellar'
+import { addCare, harvest, StageChangedError, startAging, type HarvestResult } from './game/cellar'
+import { buddySpecies } from './game/buddy'
+import { lineQuery, pickLine } from './game/lines'
 import { debugClockOffset } from './game/time'
 import { gameParams } from './game/zukan'
 import { speciesById } from './game/judge'
 import ZukanCheck from './pages/ZukanCheck'
 import {
   debugAdvance,
+  debugBuddyLastInteraction,
+  debugBuddySpecies,
+  debugBuddyValues,
   debugClearSave,
   debugResetClock,
   dismissNotice,
+  dismissWelcome,
   openScreen,
   openTab,
   play,
+  playBuddy,
+  retryLoad,
   tick,
   useApp,
   type AppState,
   type Tab,
 } from './state/app'
+import { BuddyPage, WelcomeModal } from './ui/BuddyPage'
 import { CarePage } from './ui/CarePage'
 import { CellarPage } from './ui/CellarPage'
 import { HarvestPage, HarvestResultView } from './ui/HarvestPage'
@@ -57,30 +66,18 @@ export function TabBar({ tab, onTab }: { tab: Tab; onTab: (t: Tab) => void }) {
   )
 }
 
-export function BuddyPage() {
-  return (
-    <section className="page" aria-labelledby="buddy-title">
-      <h1 id="buddy-title" className="page-title">
-        相棒
-      </h1>
-      <div className="card placeholder-card">
-        <p>準備中</p>
-        <p className="note">うちの子との暮らしは、もうすぐはじまります。</p>
-      </div>
-    </section>
-  )
-}
-
-type Result = Pick<HarvestResult, 'species' | 'isNew' | 'recipe'> & { count: number }
+type Result = Pick<HarvestResult, 'species' | 'isNew' | 'recipe' | 'born'> & { count: number }
 
 export default function App() {
   return <AppShell {...useApp()} />
 }
 
 /** 状態を受け取って描く本体（react-dom/server のテストはここを描く） */
-export function AppShell({ phase, game, readOnly, notice, clock, tab, screen }: AppState) {
+export function AppShell({ phase, game, readOnly, loadFailed, unsaved, welcome, notice, clock, tab, screen }: AppState) {
   const [result, setResult] = useState<Result | null>(null)
   const [entryId, setEntryId] = useState<string | null>(null)
+  const [harvestNote, setHarvestNote] = useState<string | null>(null)
+  const locked = readOnly || loadFailed
 
   useEffect(() => {
     const id = setInterval(tick, TICK_MS)
@@ -117,6 +114,10 @@ export function AppShell({ phase, game, readOnly, notice, clock, tab, screen }: 
           setResult(null)
           openTab('zukan')
         }}
+        onBuddy={() => {
+          setResult(null)
+          openTab('buddy')
+        }}
       />
     )
   } else if (screen?.kind === 'prep') {
@@ -134,7 +135,7 @@ export function AppShell({ phase, game, readOnly, notice, clock, tab, screen }: 
     body = (
       <CarePage
         aging={slotAging}
-        readOnly={readOnly}
+        readOnly={locked}
         onBack={backToCellar}
         onCare={(c) => play((g) => addCare(g, screen.slot, c))}
       />
@@ -145,17 +146,36 @@ export function AppShell({ phase, game, readOnly, notice, clock, tab, screen }: 
         aging={slotAging}
         now={clock}
         registeredCount={Object.keys(game.zukan.registered).length}
-        readOnly={readOnly}
-        onBack={backToCellar}
-        onHarvest={(finish) => {
+        readOnly={locked}
+        note={harvestNote}
+        onBack={() => {
+          setHarvestNote(null)
+          backToCellar()
+        }}
+        onHarvest={(finish, shownStage) => {
           let r: HarvestResult | null = null
-          play((g, t) => {
-            r = harvest(g, screen.slot, finish, t)
-            return r.state
-          })
+          try {
+            play((g, t) => {
+              r = harvest(g, screen.slot, finish, t, shownStage)
+              return r.state
+            })
+          } catch (e) {
+            // 押した時刻の段が画面と違った：確定しないで画面を更新し、もう一度押してもらう
+            if (!(e instanceof StageChangedError)) throw e
+            tick()
+            setHarvestNote('ちょうど段階が変わりました。表示を新しくしたので、もう一度押してください')
+            return
+          }
           const got = r as HarvestResult | null
           if (got) {
-            setResult({ species: got.species, isNew: got.isNew, recipe: got.recipe, count: got.state.zukan.registered[got.species.id].count })
+            setHarvestNote(null)
+            setResult({
+              species: got.species,
+              isNew: got.isNew,
+              recipe: got.recipe,
+              born: got.born,
+              count: got.state.zukan.registered[got.species.id].count,
+            })
             openScreen(null)
           }
         }}
@@ -173,13 +193,13 @@ export function AppShell({ phase, game, readOnly, notice, clock, tab, screen }: 
       </div>
     )
   } else if (tab === 'buddy') {
-    body = <BuddyPage />
+    body = <BuddyPage game={game} now={clock} readOnly={locked} onAction={playBuddy} onCellar={() => openTab('cellar')} />
   } else if (tab === 'cellar') {
     body = (
       <CellarPage
         game={game}
         now={clock}
-        readOnly={readOnly}
+        readOnly={locked}
         onPrep={(slot) => openScreen({ kind: 'prep', slot })}
         onCare={(slot) => openScreen({ kind: 'care', slot })}
         onHarvest={(slot) => openScreen({ kind: 'harvest', slot })}
@@ -192,10 +212,14 @@ export function AppShell({ phase, game, readOnly, notice, clock, tab, screen }: 
       <SettingsPage
         debug={DEBUG_TOOLS}
         affection={game.buddy.affection}
+        buddy={game.buddy}
         clockOffsetMs={debugClockOffset()}
-        readOnly={readOnly}
+        readOnly={locked}
         onAdvance={debugAdvance}
         onResetClock={debugResetClock}
+        onBuddySpecies={debugBuddySpecies}
+        onBuddyValues={debugBuddyValues}
+        onBuddyLastInteraction={debugBuddyLastInteraction}
         onLevel={(lv) => play((g) => ({ ...g, buddy: { ...g.buddy, affection: gameParams.LV_TH[lv - 1] } }))}
         onClearSave={() => void debugClearSave()}
         onZukanCheck={() => openScreen({ kind: 'zukanCheck' })}
@@ -204,12 +228,27 @@ export function AppShell({ phase, game, readOnly, notice, clock, tab, screen }: 
   }
 
   const entry = entryId && game.zukan.registered[entryId] ? entryId : null
+  const sp = buddySpecies(game)
+  const welcomeText = () => (sp ? pickLine(lineQuery(game.buddy, sp, 'reunion', clock), null, () => 0)?.text : null) ?? 'おかえり！'
 
   return (
     <div className="app-shell">
       {readOnly && (
         <p className="banner banner-warn" role="alert">
           このセーブは新しい版のアプリで保存されています。上書きしないよう、この版では保存しません。アプリを更新してください。
+        </p>
+      )}
+      {loadFailed && (
+        <p className="banner banner-warn" role="alert">
+          セーブを読み込めませんでした。いまのセーブを上書きしないよう、保存と操作を止めています。
+          <button type="button" className="btn btn-small" onClick={() => void retryLoad()}>
+            もう一度読む
+          </button>
+        </p>
+      )}
+      {unsaved && !notice && (
+        <p className="banner" role="status">
+          まだ保存できていない変更があります（次の操作のときに保存し直します）
         </p>
       )}
       {notice && (
@@ -221,6 +260,9 @@ export function AppShell({ phase, game, readOnly, notice, clock, tab, screen }: 
         </p>
       )}
       <main className="app-main">{body}</main>
+      {welcome && tab === 'buddy' && !screen && !result && (
+        <WelcomeModal affection={welcome.affection} hint={welcome.hint} text={welcomeText()} onClose={dismissWelcome} />
+      )}
       {entry && tab === 'zukan' && !screen && (
         <ZukanEntry species={speciesById(entry)} registered={game.zukan.registered[entry]} onClose={() => setEntryId(null)} />
       )}

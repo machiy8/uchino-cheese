@@ -25,6 +25,18 @@ export function resetDebugClock(): void {
   offsetMs = 0
 }
 
+export const HOUR_MS = 3_600_000
+
+/** 経過時間（整数・切り捨て）。時計が戻っていたら 0 */
+export function elapsedHours(from: number, to: number): number {
+  return Math.max(0, Math.floor((to - from) / HOUR_MS))
+}
+
+/** 端末のローカル時刻の「時」（0〜23） */
+export function localHour(t: number): number {
+  return new Date(t).getHours()
+}
+
 /** 経過分（整数・切り捨て）。時計が戻っていたら 0 */
 export function elapsedMinutes(from: number, to: number): number {
   return Math.max(0, Math.floor((to - from) / 60000))
@@ -52,4 +64,9 @@ export function toIso(t: number): string {
 /** 保存した時刻を読む。読めなければ NaN */
 export function parseIso(s: string): number {
   return Date.parse(s)
+}
+
+/** ゲーム上の日付の書き方（YYYY-MM-DD・実在する日）か */
+export function isDayString(s: string): boolean {
+  return /^\d{4}-\d{2}-\d{2}$/.test(s) && new Date(`${s}T00:00:00Z`).toISOString().slice(0, 10) === s
 }
