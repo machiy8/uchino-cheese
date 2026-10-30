@@ -9,6 +9,7 @@ import {
   GameError,
   harvest,
   harvestStage,
+  StageChangedError,
   registeredCount,
   slotView,
   startAging,
@@ -32,7 +33,7 @@ const prep: PrepInput = { milk: '牛', bac: 'なし', press: 0, room: 'しっと
 /** なつき（累計）を Lv のしきい値にした状態 */
 function stateAtLevel(lv: number): GameState {
   const s = newGameState(T0, 'test')
-  return { ...s, buddy: { affection: gameParams.LV_TH[lv - 1] } }
+  return { ...s, buddy: { ...s.buddy, affection: gameParams.LV_TH[lv - 1] } }
 }
 /** 短縮% → その%になる最小の Lv */
 const LV_OF_PCT: Record<number, number> = { 0: 1, 3: 4, 5: 6, 7: 8, 10: 10 }
@@ -82,7 +83,7 @@ describe('取り出しの窓', () => {
   it('熟成中に Lv が上がっても、枠の boostPct と取り出しの段は変わらない。次に仕込む枠から効く', () => {
     let s = startAging(stateAtLevel(1), prep, T0)
     const before = s.aging[0]
-    s = { ...s, buddy: { affection: gameParams.LV_TH[9] } }
+    s = { ...s, buddy: { ...s.buddy, affection: gameParams.LV_TH[9] } }
     s = addCare(s, 1, '塩')
     expect(s.aging[0].boostPct).toBe(0)
     // 10% 短縮なら届く 1,296分（T4）でも、0% の枠はまだ T3
@@ -102,33 +103,41 @@ describe('取り出しの窓', () => {
 describe('手入れの決め方', () => {
   const log = (p: Partial<Record<CareButton | '練る', number>>) => ({ 洗う: 0, 返す: 0, 針: 0, 塩: 0, 練る: 0, ...p })
 
+  const seq = (p: Partial<Record<CareButton, number>>) => ({ 洗う: 0, 返す: 0, 針: 0, 塩: 0, ...p })
+
   it('練るをしたら、他がどれだけ多くても「練る」', () => {
-    expect(decideCare({ careLog: log({ 練る: 1, 洗う: 9 }), careLast: '洗う' })).toBe('練る')
+    expect(decideCare({ careLog: log({ 練る: 1, 洗う: 9 }), careSeq: seq({ 洗う: 9 }) })).toBe('練る')
   })
 
   it('一番多い手入れ', () => {
-    expect(decideCare({ careLog: log({ 洗う: 1, 針: 3, 塩: 2 }), careLast: '洗う' })).toBe('針')
+    expect(decideCare({ careLog: log({ 洗う: 1, 針: 3, 塩: 2 }), careSeq: seq({ 針: 3, 塩: 5, 洗う: 6 }) })).toBe('針')
   })
 
-  it('同数なら careLast の方', () => {
-    expect(decideCare({ careLog: log({ 洗う: 2, 返す: 2 }), careLast: '返す' })).toBe('返す')
-    expect(decideCare({ careLog: log({ 洗う: 2, 返す: 2 }), careLast: '洗う' })).toBe('洗う')
+  it('同数なら、その中で最後に行った方', () => {
+    expect(decideCare({ careLog: log({ 洗う: 2, 返す: 2 }), careSeq: seq({ 洗う: 3, 返す: 4 }) })).toBe('返す')
+    expect(decideCare({ careLog: log({ 洗う: 2, 返す: 2 }), careSeq: seq({ 洗う: 4, 返す: 3 }) })).toBe('洗う')
   })
 
-  it('careLast が同数の中に無いときは 洗う→返す→針→塩 の順で先の方', () => {
-    expect(decideCare({ careLog: log({ 返す: 2, 塩: 2, 針: 1 }), careLast: '針' })).toBe('返す')
+  it('最後の手入れが同数の中に無いとき（最後は針）も、同数の中で後に行った方（洗う→返す→針→塩 の順は使わない）', () => {
+    // 塩・返す・塩・返す・針 → 返す2・塩2 で、後に行ったのは返す（4回目）
+    expect(decideCare({ careLog: log({ 返す: 2, 塩: 2, 針: 1 }), careSeq: seq({ 塩: 3, 返す: 4, 針: 5 }) })).toBe('返す')
+    // 返す・塩・返す・塩・針 → 後に行ったのは塩（洗う→返す→針→塩 の順なら返すになっていた）
+    expect(decideCare({ careLog: log({ 返す: 2, 塩: 2, 針: 1 }), careSeq: seq({ 返す: 3, 塩: 4, 針: 5 }) })).toBe('塩')
   })
 
   it('0回なら「なし」', () => {
-    expect(decideCare({ careLog: log({}), careLast: null })).toBe('なし')
+    expect(decideCare({ careLog: log({}), careSeq: seq({}) })).toBe('なし')
   })
 
-  it('お手入れの回数と careLast が枠に残る（回数と間隔の制限なし）', () => {
+  it('お手入れの回数と、手入れごとの最後の順番が枠に残る（回数と間隔の制限なし）', () => {
     let s = startAging(stateAtLevel(1), prep, T0)
     for (const c of ['洗う', '洗う', '返す', '返す', '返す', '洗う'] as const) s = addCare(s, 1, c)
     expect(s.aging[0].careLog).toEqual(log({ 洗う: 3, 返す: 3 }))
-    expect(s.aging[0].careLast).toBe('洗う')
+    expect(s.aging[0].careSeq).toEqual(seq({ 洗う: 6, 返す: 5 }))
     expect(slotView(s.aging[0], T0).care).toBe('洗う')
+    s = addCare(addCare(s, 1, '塩'), 1, '返す')
+    expect(s.aging[0].careSeq).toEqual(seq({ 洗う: 6, 返す: 8, 塩: 7 }))
+    expect(slotView(s.aging[0], T0).care).toBe('返す')
   })
 })
 
@@ -156,7 +165,7 @@ describe('仕込み', () => {
       startedAt: new Date(T0).toISOString(),
       input: { milk: '牛', bac: 'なし', press: 0, room: 'しっとり', finish: null },
       careLog: { 洗う: 0, 返す: 0, 針: 0, 塩: 0, 練る: 1 },
-      careLast: null,
+      careSeq: { 洗う: 0, 返す: 0, 針: 0, 塩: 0 },
       boostPct: 3,
     })
   })
@@ -293,5 +302,21 @@ describe('仕上げの解放と図鑑の登録数', () => {
     s = harvest(s, 1, 'なし', T0 + 1440 * MIN).state
     expect(Object.keys(s.zukan.registered).sort()).toEqual(['f66', 'r01'])
     expect(registeredCount(s)).toBe(2)
+  })
+})
+
+describe('取り出しを押した時刻の段が、画面に出ていた段と違ったら確定しない', () => {
+  it('画面は T1（30分もの）のまま、押した時刻は T2 → StageChangedError・何も変えない', () => {
+    const s = startAging(stateAtLevel(1), prep, T0)
+    const pressAt = T0 + 180 * MIN
+    expect(() => harvest(s, 1, 'なし', pressAt, 'T1')).toThrow(StageChangedError)
+    try {
+      harvest(s, 1, 'なし', pressAt, 'T1')
+    } catch (e) {
+      expect((e as StageChangedError).stage).toBe('T2')
+    }
+    expect(s.aging).toHaveLength(1)
+    // 同じ段なら確定する
+    expect(harvest(s, 1, 'なし', pressAt, 'T2').recipe.time).toBe('T2')
   })
 })

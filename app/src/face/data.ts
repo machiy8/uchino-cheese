@@ -15,6 +15,10 @@ export interface SpeciesFace {
   vintageArt?: boolean
   /** 位置を目で確かめた日 */
   checked?: string
+  /** 体の外接矩形 [左, 上, 右, 下]（千分率） */
+  bbox?: number[]
+  /** 体の太い部分の矩形 [左, 上, 右, 下]（千分率・ワイルド度 E2・E3 を合わせる。計画 §6 #1） */
+  bodyMain?: number[]
 }
 
 export const faceStyle: FaceStyle = styleJson as unknown as FaceStyle

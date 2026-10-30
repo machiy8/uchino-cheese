@@ -3,6 +3,8 @@ import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { AppShell } from '../src/App'
+import { speciesFaces } from '../src/face'
+import { advanceBuddy, birth, buddyOp } from '../src/game/buddy'
 import { addCare, startAging } from '../src/game/cellar'
 import { newGameState, type GameState } from '../src/game/state'
 import { speciesFile } from '../src/game/zukan'
@@ -11,7 +13,9 @@ import { CarePage } from '../src/ui/CarePage'
 import { CellarPage } from '../src/ui/CellarPage'
 import { HarvestPage, HarvestResultView } from '../src/ui/HarvestPage'
 import { PrepPage } from '../src/ui/PrepPage'
-import { SettingsPage } from '../src/ui/SettingsPage'
+import { DOWN_OPACITY } from '../src/ui/BuddyFigure'
+import { BuddyPage, bubbleOf, MOOD_EXPR, WelcomeModal } from '../src/ui/BuddyPage'
+import { LAST_OP_STEPS, SettingsPage } from '../src/ui/SettingsPage'
 import { ZukanEntry, ZukanPage } from '../src/ui/ZukanPage'
 import { formatMinutes } from '../src/ui/format'
 
@@ -25,7 +29,7 @@ const html = (el: Parameters<typeof renderToStaticMarkup>[0]) => decode(renderTo
 function shelf(): GameState {
   let s = newGameState(T0, 'test')
   s = startAging(s, { milk: '牛', bac: '青カビ', press: 0, room: 'しっとり', knead: false }, T0 + 1440 * MIN, 2)
-  s = { ...s, buddy: { affection: 300 } }
+  s = { ...s, buddy: { ...s.buddy, affection: 300 } }
   s = startAging(s, { milk: '水牛', bac: 'なし', press: 0, room: 'しっとり', knead: true }, T0, 3)
   s = addCare(addCare(s, 3, '洗う'), 3, '塩')
   return s
@@ -216,13 +220,25 @@ describe('設定 S8', () => {
 })
 
 describe('骨組み', () => {
-  const base: AppState = { phase: 'ready', game: shelf(), readOnly: false, notice: null, clock: T0, tab: 'buddy', screen: null }
+  const base: AppState = {
+    phase: 'ready',
+    game: shelf(),
+    readOnly: false,
+    loadFailed: false,
+    unsaved: false,
+    welcome: null,
+    notice: null,
+    clock: T0,
+    tab: 'buddy',
+    screen: null,
+  }
 
-  it('下のタブ4つ（相棒・熟成棚・図鑑・設定）。相棒は「準備中」', () => {
+  it('下のタブ4つ（相棒・熟成棚・図鑑・設定）。相棒がいなければ「熟成棚で最初の1個を取り出すと…」', () => {
     const h = html(createElement(AppShell, base))
     expect([...h.matchAll(/data-tab="(\w+)">([^<]+)</g)].map((m) => m[2])).toEqual(['相棒', '熟成棚', '図鑑', '設定'])
     expect(h).toContain('aria-current="page" data-tab="buddy"')
-    expect(h).toContain('準備中')
+    expect(h).toContain('data-buddy="none"')
+    expect(h).toContain('熟成棚で最初の1個を取り出すと')
     expect(html(createElement(AppShell, { ...base, tab: 'cellar' })).match(/data-slot=/g)).toHaveLength(3)
     expect(html(createElement(AppShell, { ...base, tab: 'zukan' })).match(/data-card=/g)).toHaveLength(82)
   })
@@ -235,5 +251,173 @@ describe('骨組み', () => {
     const h = html(createElement(AppShell, { ...base, tab: 'cellar', readOnly: true }))
     expect(h).toContain('新しい版のアプリで保存されています')
     expect(h).toContain('<button type="button" class="btn btn-primary" disabled="">仕込む</button>')
+  })
+})
+
+describe('ホーム S2（相棒）', () => {
+  const born = (id = 'r07') => birth(newGameState(T0, 'test'), id, T0)
+  const page = (g: GameState, now = T0) => html(createElement(BuddyPage, { game: g, now, onAction: () => null, onCellar: noop }))
+
+  it('相棒あり：体＋顔・ハートと Lv・いっしょに◯日目・機嫌・元気・操作のボタン', () => {
+    const h = page(born())
+    expect(h).toContain('data-buddy="r07"')
+    expect(h).toContain('カマンベール・ド・ノルマンディ')
+    expect(h).toMatch(/いっしょに<strong data-days="1">1<\/strong>日目・うまれたて/)
+    expect(h).toContain('Lv1')
+    expect(h).toContain('data-mood="70"')
+    expect(h).toContain('にこにこ')
+    expect(h).toContain('data-energy="80"')
+    expect(h).toMatch(/<image href="[^"]*body\/512\/r07\.webp/)
+    expect(h).toMatch(/<g transform="translate\([^"]+" data-type="maru" data-expr="proud"/)
+    expect(h).toContain('aria-label="なでる"')
+    for (const op of ['talk', 'feed', 'sleep', 'care', 'sun']) expect(h).toContain(`data-op="${op}"`)
+    expect(h.match(/data-op="care"/g)).toHaveLength(2)
+    expect(h.match(/data-op="sun"/g)).toHaveLength(2)
+  })
+
+  it('相棒なし：「熟成棚で最初の1個を取り出すと…」', () => {
+    const h = page(newGameState(T0, 'test'))
+    expect(h).toContain('data-buddy="none"')
+    expect(h).toContain('熟成棚で最初の1個を取り出すと、そのチーズが相棒として生まれます')
+    expect(h).not.toContain('<svg')
+  })
+
+  it('うまれたて（1日目）だけ産毛 D1（不透明度は1つの定数・0.5〜1.0）', () => {
+    expect(DOWN_OPACITY).toBeGreaterThanOrEqual(0.5)
+    expect(DOWN_OPACITY).toBeLessThanOrEqual(1)
+    const h = page(born())
+    expect(h).toMatch(new RegExp(`<image class="ov-down" href="[^"]*overlay/512/D1\\.webp[^"]*"[^>]* opacity="${DOWN_OPACITY}" mask="url\\(#`))
+    const g = born()
+    const young = page({ ...g, buddy: { ...g.buddy, daysTogether: 2 } })
+    expect(young).not.toContain('ov-down')
+    expect(young).toContain('若チーズ')
+  })
+
+  it('すね：体を左右反転して顔を消す', () => {
+    const g = advanceBuddy(born(), T0 + 30 * 3_600_000).state
+    expect(g.buddy.sulking).toBe(true)
+    const h = page(g, T0 + 30 * 3_600_000)
+    expect(h).toContain('data-sulking="true"')
+    expect(h).toContain('<g transform="translate(512 0) scale(-1 1)">')
+    expect(h).toContain('data-expr="back"')
+    expect(h).not.toContain('data-type="maru"')
+    expect(h).toContain('すねてる')
+  })
+
+  it('ワイルド度3：E3 を体の太い部分の矩形に合わせ、輪郭を広げた範囲で切る（E1・E2 は出さない）', () => {
+    const g = born()
+    const h = page({ ...g, buddy: { ...g.buddy, wild: 3, daysTogether: 5 } })
+    expect(h).toContain('data-wild="3"')
+    expect(h).toMatch(/<image class="ov-wild" href="[^"]*overlay\/512\/E3\.webp[^"]*"[^>]*preserveAspectRatio="none" mask="url\(#[^)]*-mg\)"/)
+    expect(h).toContain('<feMorphology operator="dilate" radius="10"')
+    expect(h).not.toMatch(/E[12]\.webp/)
+    // r07 の bodyMain に ×1.04 で合わせた位置
+    const bm = speciesFaces.r07.bodyMain!
+    const k = 512 / 1000
+    const w = (bm[2] - bm[0]) * k * 1.04
+    expect(h).toContain(`width="${w}"`)
+  })
+
+  it('ワイルド度1：E1 を外接矩形に散らし、体の輪郭で切る', () => {
+    const g = born()
+    const h = page({ ...g, buddy: { ...g.buddy, wild: 1 } })
+    expect(h).toMatch(/<image class="ov-wild" href="[^"]*overlay\/512\/E1\.webp[^"]*"[^>]* mask="url\(#[^)]*-m\)"/)
+    expect(h).not.toContain('feMorphology')
+  })
+
+  it('機嫌の5段階 → 表情（対応表 MOOD_EXPR）。寝ている・元気30未満は「ねむい」', () => {
+    expect(MOOD_EXPR).toEqual({ ごきげん: 'smile', にこにこ: 'proud', ふつう: 'normal', しょんぼり: 'sad', すねすね: 'sulk' })
+    const g = born()
+    const ex = (mood: number, energy = 80) => page({ ...g, buddy: { ...g.buddy, mood, energy } }).match(/data-type="maru" data-expr="(\w+)"/)![1]
+    expect([90, 70, 50, 30, 10].map((m) => ex(m))).toEqual(['smile', 'proud', 'normal', 'sad', 'sulk'])
+    expect(ex(90, 29)).toBe('sleep')
+  })
+
+  it('寝ている：寝かせるの代わりに「おはよう」', () => {
+    const t = new Date(2026, 10, 2, 21, 0).getTime()
+    const g = buddyOp(birth(newGameState(t, 'test'), 'r07', t), { op: 'sleep' }, t).state
+    const h = page(g, t)
+    expect(h).toContain('data-sleeping="true"')
+    expect(h).toContain('data-op="wake"')
+    expect(h).not.toContain('data-op="sleep"')
+  })
+
+  it('上限・クールダウンの吹き出し：反応の一言と「数値はそのまま」', () => {
+    let g = born()
+    g = buddyOp(g, { op: 'feed' }, T0).state
+    const r = buddyOp(g, { op: 'feed' }, T0 + 60_000)
+    const b = bubbleOf(r, { op: 'feed' }, T0 + 60_000, null, () => 0)
+    expect(b).toMatchObject({ text: 'ちょっと待ってね', effect: false })
+    expect(b.note).toBe('数値はそのまま（あと2時間59分）')
+    const ok = bubbleOf(buddyOp(born(), { op: 'pet' }, T0), { op: 'pet' }, T0, null, () => 0)
+    expect(ok).toMatchObject({ effect: true, note: '機嫌+5・なつき+1' })
+    const h = html(createElement(BuddyPage, { game: g, now: T0, onAction: () => null, onCellar: noop, initialBubble: b }))
+    expect(h).toContain('数値はそのまま（あと2時間59分）')
+  })
+
+  it('おかえり（再会）のモーダル', () => {
+    const h = html(createElement(WelcomeModal, { affection: 10, hint: true, text: 'おかえり！', onClose: noop }))
+    expect(h).toContain('再会ボーナス なつき+10')
+    expect(h).toContain('おかえり！')
+  })
+})
+
+describe('取り出しと相棒の誕生・読み込みの失敗・デバッグ', () => {
+  it('取り出した結果：相棒がいなかったら「相棒が生まれた！」と「相棒に会う」', () => {
+    const species = speciesFile.species[0]
+    const recipe = { milk: '牛', bac: 'なし', press: 0, room: 'しっとり', time: 'T1' as const, care: 'なし', finish: 'なし' }
+    const h = html(createElement(HarvestResultView, { result: { species, isNew: true, recipe, count: 1, born: true }, onBack: noop, onZukan: noop, onBuddy: noop }))
+    expect(h).toContain('data-born="true"')
+    expect(h).toContain('相棒が生まれた！')
+    expect(h).toContain('相棒に会う')
+  })
+
+  it('取り出しの段が変わっていたときの知らせ', () => {
+    const s = startAging(newGameState(T0, 'test'), { milk: '牛', bac: 'なし', press: 0, room: 'しっとり', knead: false }, T0)
+    const h = html(createElement(HarvestPage, { aging: s.aging[0], now: T0 + 31 * MIN, registeredCount: 0, note: 'ちょうど段階が変わりました', onHarvest: noop, onBack: noop }))
+    expect(h).toContain('ちょうど段階が変わりました')
+    expect(h).toContain('data-stage="T1"')
+  })
+
+  it('読み込みに失敗：保存と操作を止めて「読み込めませんでした」', () => {
+    const base: AppState = {
+      phase: 'ready',
+      game: newGameState(T0, 'test'),
+      readOnly: false,
+      loadFailed: true,
+      unsaved: false,
+      welcome: null,
+      notice: null,
+      clock: T0,
+      tab: 'cellar',
+      screen: null,
+    }
+    const h = html(createElement(AppShell, base))
+    expect(h).toContain('セーブを読み込めませんでした')
+    expect(h).toContain('もう一度読む')
+    expect(h).toContain('<button type="button" class="btn btn-primary" disabled="">仕込む</button>')
+  })
+
+  it('設定のデバッグ：相棒の種（82種）・機嫌／元気／なつき・最後の操作を◯時間前にする', () => {
+    const g = birth(newGameState(T0, 'test'), 'r07', T0)
+    const h = html(
+      createElement(SettingsPage, {
+        debug: true,
+        affection: 0,
+        buddy: g.buddy,
+        clockOffsetMs: 0,
+        onAdvance: noop,
+        onResetClock: noop,
+        onLevel: noop,
+        onClearSave: noop,
+        onZukanCheck: noop,
+      }),
+    )
+    expect(h.match(/<option /g)).toHaveLength(82)
+    expect(h).toContain('data-debug-mood=""')
+    expect(h).toContain('data-debug-energy=""')
+    expect(h).toContain('data-debug-affection=""')
+    for (const n of LAST_OP_STEPS) expect(h).toContain(`data-last-op="${n}"`)
+    expect(h).toContain('選び直す')
   })
 })
